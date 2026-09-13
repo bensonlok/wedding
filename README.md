@@ -58,6 +58,26 @@ weddingISO: "2026-11-22T17:00:00+08:00",
 
 Optional: add an Open Graph image and set `og:image` / `og:url` in `index.html` for nicer WhatsApp / Messenger previews.
 
+
+## Photos
+
+Place JPEGs in `assets/photos/` named:
+
+```
+photo-01.jpg
+photo-02.jpg
+…
+```
+
+The page auto-discovers them for:
+
+1. **Hero background** — prefers `CONFIG.heroPhoto` in `script.js` (set to a romantic couple shot), otherwise the first photo found. Falls back to the burgundy gradient if the folder is empty.
+2. **Gallery** — shown only when at least one photo loads; otherwise the section stays hidden.
+
+```js
+heroPhoto: "photo-03.jpg", // romantic couple shot
+```
+
 ## Local preview
 
 Open `index.html` in a browser, or serve the folder:
