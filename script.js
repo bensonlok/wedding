@@ -17,7 +17,7 @@ const CONFIG = {
   // Prefer a romantic couple shot for the hero.
   // Set to a specific filename (e.g. "photo-03.jpg") once you pick one,
   // or leave null to auto-pick the first available photo.
-  heroPhoto: "photo-05.jpg", // romantic couple shot — kiss with burgundy roses
+  heroPhoto: "photo-05-wedding.jpg", // AI-enhanced wedding attire (Gemini)
 
   // Index (0-based among found photos) to make wide in the grid
   wideIndexes: [2, 4, 9], // boat heart, roses kiss, dress fitting
@@ -235,12 +235,17 @@ function revealFadeIns(scope) {
       return;
     }
 
-    let heroSrc = photos[0].src;
+    let heroSrc = photos[0] ? photos[0].src : null;
     if (CONFIG.heroPhoto) {
       const match = photos.find((p) => p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto));
-      if (match) heroSrc = match.src;
+      heroSrc = match ? match.src : (CONFIG.photoDir + CONFIG.heroPhoto);
     }
-    setHero(heroSrc);
-    renderGallery(photos);
+    if (heroSrc) setHero(heroSrc);
+    // Prefer showing the wedding-attire hero in the gallery too (front)
+    const galleryPhotos = photos.slice();
+    if (CONFIG.heroPhoto && !galleryPhotos.some((p) => p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto))) {
+      galleryPhotos.unshift({ name: CONFIG.heroPhoto, src: CONFIG.photoDir + CONFIG.heroPhoto });
+    }
+    renderGallery(galleryPhotos);
   });
 })();
