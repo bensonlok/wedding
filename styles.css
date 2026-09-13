@@ -698,7 +698,7 @@ em { font-style: italic; }
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 22%;
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 0.8s var(--ease);

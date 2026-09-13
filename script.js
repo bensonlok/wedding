@@ -17,10 +17,10 @@ const CONFIG = {
   // Prefer a romantic couple shot for the hero.
   // Set to a specific filename (e.g. "photo-03.jpg") once you pick one,
   // or leave null to auto-pick the first available photo.
-  heroPhoto: null,
+  heroPhoto: "photo-05.jpg", // romantic couple shot — kiss with burgundy roses
 
   // Index (0-based among found photos) to make wide in the grid
-  wideIndexes: [0],
+  wideIndexes: [2, 4, 9], // boat heart, roses kiss, dress fitting
 };
 
 /* ----- Countdown ----- */
