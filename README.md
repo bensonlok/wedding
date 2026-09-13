@@ -46,14 +46,14 @@ Also update the countdown date in `script.js`:
 ```js
 const CONFIG = {
   // Replace with your real wedding date/time (ISO 8601 + timezone)
-  weddingISO: "2099-01-01T17:00:00+08:00",
+  weddingISO: "2026-11-20T17:00:00+08:00",
 };
 ```
 
 Example for Malaysia (UTC+8):
 
 ```js
-weddingISO: "2026-11-22T17:00:00+08:00",
+weddingISO: "2026-11-20T17:00:00+08:00",
 ```
 
 Optional: add an Open Graph image and set `og:image` / `og:url` in `index.html` for nicer WhatsApp / Messenger previews.

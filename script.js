@@ -6,7 +6,7 @@
 const CONFIG = {
   // TODO: Replace with your real wedding date/time (ISO 8601 with timezone).
   // Example for Malaysia (UTC+8): '2026-11-22T17:00:00+08:00'
-  weddingISO: "2099-01-01T17:00:00+08:00",
+  weddingISO: "2026-11-20T17:00:00+08:00",
 
   // Photo folder (relative to this page). Files expected: photo-01.jpg … photo-N.jpg
   photoDir: "assets/photos/",
