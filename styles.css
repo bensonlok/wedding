@@ -821,3 +821,30 @@ em { font-style: italic; }
   }
   .scroll-hint span { animation: none; }
 }
+
+
+/* =========================================================
+   PROPOSAL VIDEO
+   ========================================================= */
+.proposal-video { background: var(--cream); }
+.proposal-video__frame {
+  margin-top: 1.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--gold-pale);
+  box-shadow: var(--shadow);
+  background: #1a0b10;
+}
+.proposal-video__player {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #1a0b10;
+}
+.proposal-video__note {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted, #6b4a52);
+}
+.proposal-video__note a { color: var(--burgundy); }
