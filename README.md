@@ -22,13 +22,15 @@ A polished, mobile-first static wedding invitation for **Benson Lok & Mecki Tan*
 
 ## How to edit placeholders
 
-Open `index.html` and search for bracketed tokens (only the RSVP ones remain; timeline, venue and story are filled in). Replace each one with your real details:
+There are no bracketed placeholders left in `index.html`. The **RSVP section is hidden** until you have a real link. To turn it on, edit `CONFIG.rsvp` in `script.js`:
 
-| Placeholder | Where | Example |
-|-------------|-------|---------|
-| `[WEDDING DATE]` | Hero, footer, OG description | `22 November 2026 (Sunday)` |
-| `[RSVP LINK]` | RSVP button `href` | Google Form / WhatsApp link |
-| `[RSVP DEADLINE]` | RSVP section | `1 November 2026` |
+```js
+rsvp: {
+  enabled: true,
+  link: "https://…",            // Google Form / WhatsApp link
+  deadline: "1 November 2026",  // optional; leave "" to omit the deadline line
+},
+```
 
 Also update the countdown date in `script.js`:
 

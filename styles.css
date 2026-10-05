@@ -335,6 +335,7 @@ em { font-style: italic; }
     linear-gradient(165deg, var(--burgundy-deep) 0%, var(--burgundy) 50%, var(--rose) 100%);
   color: var(--warm-white);
 }
+.rsvp[hidden], [data-rsvp-deadline][hidden] { display: none !important; }
 .rsvp .section__eyebrow { color: var(--gold-soft); }
 .rsvp .section__title { color: var(--warm-white); }
 
