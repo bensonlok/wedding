@@ -19,14 +19,19 @@ const CONFIG = {
   // or leave null to auto-pick the first available photo.
   heroPhoto: "photo-05-wedding.jpg", // groom & bride in wedding attire (AI-enhanced)
 
+  // RSVP block is hidden until a real link is provided.
+  // To enable: set enabled: true and fill in link (and optionally deadline, e.g. "1 November 2026").
+  rsvp: {
+    enabled: false,
+    link: "",
+    deadline: "",
+  },
+
   // Photos (by filename) shown double-width in the grid (landscape shots)
   wideNames: ["photo-03.jpg"], // boat heart (photo-19 is portrait, so it stays a normal 4:5 tile)
 
   // Optional crop focus (CSS object-position) per photo so faces stay in frame
   focus: {
-    "photo-20.jpg": "center 80%", // fireworks toast
-    "photo-21.jpg": "center 40%", // smiling at pink fireworks
-    "photo-22.jpg": "center 70%", // champagne toast with sparkler
     "photo-13.jpg": "center 70%",
     "photo-14.jpg": "center 75%",
     "photo-15.jpg": "center 75%",
@@ -175,7 +180,7 @@ function revealFadeIns(scope) {
       } else {
         misses += 1;
         // Stop after a few consecutive misses once we've started
-        if (found.length && misses >= 3) break;
+        if (found.length && misses >= 5) break; // tolerate gaps (e.g. removed photo-20…22)
         // Or if first ones missing, keep scanning a bit then stop
         if (!found.length && i >= 8) break;
       }
@@ -262,4 +267,22 @@ function revealFadeIns(scope) {
     if (heroItem) galleryPhotos.unshift(heroItem);
     renderGallery(galleryPhotos);
   });
+})();
+
+/* ----- RSVP (hidden unless CONFIG.rsvp.enabled and a link is set) ----- */
+(function initRsvp() {
+  const cfg = CONFIG.rsvp || {};
+  const section = document.getElementById("rsvp");
+  if (!section || !cfg.enabled || !cfg.link) return;
+  const btn = section.querySelector("[data-rsvp-link]");
+  if (btn) btn.setAttribute("href", cfg.link);
+  const deadlineEl = section.querySelector("[data-rsvp-deadline]");
+  if (deadlineEl) {
+    if (cfg.deadline) {
+      deadlineEl.querySelector("strong").textContent = cfg.deadline;
+      deadlineEl.hidden = false;
+    }
+  }
+  section.hidden = false;
+  revealFadeIns(section);
 })();

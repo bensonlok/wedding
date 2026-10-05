@@ -99,7 +99,6 @@
             <div class="story-card__num">02</div>
             <h3 class="story-card__title">Growing Together</h3>
             <p class="story-card__cn">同行</p>
-            <p class="story-card__body">From the streets of <strong>Japan</strong> (Nov 2024) to the pine forests of <strong>Korea</strong> (May 2025) — every trip made us a better team, and every memory made us surer.</p>
           </article>
 
           <article class="story-card fade-in">
@@ -124,7 +123,6 @@
             controls
             playsinline
             preload="metadata"
-            poster="assets/photos/photo-20.jpg"
           >
             <source src="assets/videos/proposal-web.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -243,16 +241,16 @@
       </div>
     </section>
 
-    <!-- TODO: RSVP deadline and RSVP link not yet provided — replace [RSVP DEADLINE] and [RSVP LINK] -->
-    <section class="section rsvp" id="rsvp">
+    <!-- RSVP: hidden until a real link is set. Enable via CONFIG.rsvp in script.js (enabled, link, deadline). -->
+    <section class="section rsvp" id="rsvp" hidden>
       <div class="section__inner fade-in">
         <p class="section__eyebrow">Kindly reply</p>
         <h2 class="section__title">RSVP</h2>
         <p class="rsvp__text">
           We would love to know if you can join us.<br />
-          Please RSVP by <strong>[RSVP DEADLINE]</strong>.
+          <span data-rsvp-deadline hidden>Please RSVP by <strong></strong>.</span>
         </p>
-        <a class="btn btn--primary btn--lg" href="[RSVP LINK]" target="_blank" rel="noopener noreferrer">
+        <a class="btn btn--primary btn--lg" data-rsvp-link href="#rsvp" target="_blank" rel="noopener noreferrer">
           RSVP Now
         </a>
       </div>
