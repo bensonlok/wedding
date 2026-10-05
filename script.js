@@ -4,8 +4,8 @@
  */
 
 const CONFIG = {
-  // Ceremony start: Friday 20 November 2026, 3:30 PM Malaysia time (UTC+8)
-  weddingISO: "2026-11-20T15:30:00+08:00",
+  // Day starts: Friday 20 November 2026, 3:00 PM Malaysia time (UTC+8) — Tea Ceremony
+  weddingISO: "2026-11-20T15:00:00+08:00",
 
   // RSVP form posts to Supabase (sensify-tell-us / wedding_rsvp). Benson views replies in the table editor.
   rsvp: {
