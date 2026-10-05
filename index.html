@@ -3,251 +3,259 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Benson &amp; Mecki | Wedding</title>
-  <meta name="description" content="You are warmly invited to the wedding of Benson Lok &amp; Mecki Tan." />
+  <title>Benson &amp; Mecki | Wedding 婚礼</title>
+  <meta name="description" content="You are warmly invited to the wedding of Benson &amp; Mecki — Friday, 20 November 2026, 3:30 PM, W Factory Event Space, Shah Alam." />
   <meta property="og:title" content="Benson &amp; Mecki | Wedding" />
   <meta property="og:description" content="Join us as we celebrate our wedding — 20 November 2026 (Friday) at W Factory Event Space, Shah Alam." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://www.sensify.my/invite/assets/photos/photo-05-wedding.jpg" />
   <meta property="og:url" content="https://www.sensify.my/invite/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#7B2D3E" />
+  <meta name="theme-color" content="#5C1F2E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:," />
   <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.className += " js";</script>
 </head>
 <body>
-  <div class="bg-ornament bg-ornament--tl" aria-hidden="true"></div>
-  <div class="bg-ornament bg-ornament--br" aria-hidden="true"></div>
 
-  <header class="hero" id="top">
-    <div class="hero__bg" id="heroBg" aria-hidden="true"></div>
-    <div class="hero__overlay" aria-hidden="true"></div>
-    <div class="hero__inner fade-in">
-      <p class="hero__eyebrow">Together with their families</p>
-      <div class="hero__divider" aria-hidden="true">
-        <span class="hero__diamond"></span>
-      </div>
-      <h1 class="hero__names">Benson <span class="amp">&amp;</span> Mecki</h1>
-      <p class="hero__sub">are getting married</p>
-      <p class="hero__date">20 November 2026 (Friday)</p>
-      <div class="countdown" id="countdown" aria-live="polite">
-        <div class="countdown__unit">
-          <span class="countdown__num" data-unit="days">--</span>
-          <span class="countdown__label">Days</span>
-        </div>
-        <div class="countdown__unit">
-          <span class="countdown__num" data-unit="hours">--</span>
-          <span class="countdown__label">Hours</span>
-        </div>
-        <div class="countdown__unit">
-          <span class="countdown__num" data-unit="mins">--</span>
-          <span class="countdown__label">Minutes</span>
-        </div>
-        <div class="countdown__unit">
-          <span class="countdown__num" data-unit="secs">--</span>
-          <span class="countdown__label">Seconds</span>
-        </div>
-      </div>
-      <a class="btn btn--ghost hero__cta" href="#invite">Open invitation</a>
-    </div>
-    <a class="scroll-hint" href="#invite" aria-label="Scroll down">
-      <span></span>
-    </a>
+  <!-- Top bar + menu -->
+  <header class="topbar" id="topbar">
+    <a class="topbar__mark" href="#top" aria-label="Back to top">B<span>&amp;</span>M</a>
+    <button class="topbar__menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
   </header>
+  <nav class="menu" id="menu" hidden aria-label="Sections">
+    <a href="#story">Our Story <em>我们的故事</em></a>
+    <a href="#moments">Moments <em>点滴时光</em></a>
+    <a href="#timeline">The Day <em>当日流程</em></a>
+    <a href="#location">Location <em>地点</em></a>
+    <a href="#calendar">Save to Calendar <em>加入日历</em></a>
+  </nav>
 
-  <main>
-    <section class="section invite" id="invite">
-      <div class="section__inner fade-in">
-        <p class="section__eyebrow">An invitation</p>
-        <h2 class="section__title">Dear Friends &amp; Family</h2>
-        <div class="invite__letter">
-          <p>
-            With joyful hearts, <strong>Benson Lok</strong> &amp; <strong>Mecki Tan</strong>
-            invite you to witness the beginning of their forever.
-          </p>
-          <p>
-            We would be honoured by your presence as we exchange vows and
-            celebrate the gift of love, faith, and family.
-          </p>
-          <p class="invite__cn">
-            诚挚邀请您一同见证我们幸福旅程的开始。<br />
-            愿您与我们分享这份喜悦与感恩。
-          </p>
-          <p class="invite__sign">With love,<br /><em>Benson &amp; Mecki</em></p>
+  <main id="top">
+
+    <!-- 1. HERO -->
+    <header class="hero" id="hero">
+      <div class="hero__photo" id="heroPhoto" role="img" aria-label="Benson and Mecki in their wedding attire"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__text">
+        <p class="hero__date">20 · 11 · 2026</p>
+        <p class="hero__day">Friday <span lang="zh-Hans">星期五</span> · 3:30 PM</p>
+        <h1 class="hero__names">Benson <span>&amp;</span> Mecki</h1>
+        <p class="hero__sub">A wedding celebration <span lang="zh-Hans">婚礼庆典</span></p>
+
+        <div class="countdown" id="countdown" role="timer" aria-label="Countdown to the ceremony">
+          <div class="countdown__unit"><span class="countdown__num" data-unit="days">--</span><span class="countdown__label">Days</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="hours">--</span><span class="countdown__label">Hours</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="mins">--</span><span class="countdown__label">Min</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="secs">--</span><span class="countdown__label">Sec</span></div>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#intro" aria-label="Scroll down"><span></span></a>
+    </header>
+
+    <!-- 2. INTRO -->
+    <section class="section intro" id="intro">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Together with our families</p>
+        <h2 class="title">We are getting married</h2>
+        <p class="title-cn" lang="zh-Hans">我们要结婚了</p>
+        <span class="rule" aria-hidden="true"></span>
+        <p class="lead">We would be so happy to celebrate this day with you.</p>
+        <p class="lead lead--cn" lang="zh-Hans">诚挚邀请您与我们一同见证这美好的一天。</p>
+        <div class="intro__cta">
+          <a class="btn btn--solid" href="#timeline">See the day</a>
+          <a class="btn btn--line" href="#calendar">Save the date</a>
         </div>
       </div>
     </section>
 
+    <!-- 3. OUR STORY (short, long text behind read more) -->
     <section class="section story" id="story">
-      <div class="section__inner">
-        <p class="section__eyebrow fade-in">Our journey</p>
-        <h2 class="section__title fade-in">Our Story</h2>
-        <p class="section__subtitle fade-in">爱，扎根于平凡的时光</p>
+      <div class="section__inner reveal">
+        <p class="eyebrow">Our Story · <span lang="zh-Hans">我们的故事</span></p>
+        <h2 class="title">Better together</h2>
+        <p class="title-cn" lang="zh-Hans">因爱同行</p>
+        <span class="rule" aria-hidden="true"></span>
+        <p class="lead">From everyday moments to journeys side by side, every day with each other feels like home.</p>
+        <p class="lead lead--cn" lang="zh-Hans">从平凡的日常到并肩同行的旅程，有彼此的每一天，都像回到家。</p>
+        <details class="more">
+          <summary><span class="more__open">Read more <i lang="zh-Hans">展开</i></span><span class="more__close">Show less <i lang="zh-Hans">收起</i></span></summary>
+          <div class="more__body">
+            <p>We have shared quiet moments, long walks and plenty of laughter. Along the way we grew closer, then came a proposal under the fireworks &mdash; and now we are getting married. We are so grateful to have you celebrate this day with us.</p>
+            <p lang="zh-Hans">我们一起度过了许多安静的时光、漫长的散步和无数的欢笑。在一路同行中我们越走越近，直到那个烟花下的求婚——如今，我们要结婚了。感恩有您与我们一同庆祝这一天。</p>
+          </div>
+        </details>
+      </div>
+    </section>
 
-        <div class="story__grid">
-          <article class="story-card fade-in">
-            <div class="story-card__num">01</div>
-            <h3 class="story-card__title">How We Met</h3>
-            <p class="story-card__cn">相识</p>
-            <p class="story-card__body">Benson met Mecki on <strong>20 October 2023</strong> at her restaurant, <strong>Yakitori Haki</strong> in Bukit Jalil — where a meal became the start of everything.</p>
-          </article>
-
-          <article class="story-card fade-in">
-            <div class="story-card__num">02</div>
-            <h3 class="story-card__title">Growing Together</h3>
-            <p class="story-card__cn">同行</p>
-          </article>
-
-          <article class="story-card fade-in">
-            <div class="story-card__num">03</div>
-            <h3 class="story-card__title">The Proposal</h3>
-            <p class="story-card__cn">求婚</p>
-            <p class="story-card__body">On <strong>25 June 2026</strong> in <strong>Phú Quốc</strong>, under a sky lit by fireworks, Benson &amp; Mecki celebrated their proposal — champagne in hand, ocean air, and a night they will never forget.</p>
-          </article>
+    <!-- 4. THREE CHAPTERS (photo + short bilingual text) -->
+    <section class="chapters" id="chapters" aria-label="Our chapters">
+      <article class="chapter">
+        <figure class="chapter__img reveal"><img src="assets/photos/photo-24.jpg" alt="Benson and Mecki laughing together at a small table by a window" loading="lazy" width="1200" height="1600" /></figure>
+        <div class="chapter__text reveal">
+          <p class="chapter__no">01</p>
+          <h3>Everyday moments <span lang="zh-Hans">日常点滴</span></h3>
+          <p>The best days are the simple ones &mdash; a table for two and nothing else on our minds.</p>
+          <p lang="zh-Hans">最美好的日子，往往就是最简单的相伴。</p>
         </div>
-      </div>
-    </section>
+      </article>
 
-    <section class="section gallery" id="gallery" hidden>
-      <div class="section__inner">
-        <p class="section__eyebrow fade-in">Moments</p>
-        <h2 class="section__title fade-in">Our Photos</h2>
-        <p class="section__subtitle fade-in">我们的点滴</p>
-        <div class="gallery__grid" id="galleryGrid"></div>
-      </div>
-    </section>
-
-    <section class="section scripture" id="scripture">
-      <div class="section__inner">
-        <p class="section__eyebrow fade-in">Words we hold dear</p>
-        <h2 class="section__title fade-in">Scripture</h2>
-
-        <div class="quotes">
-          <blockquote class="quote fade-in">
-            <p class="quote__en">“I found the one my heart loves.”</p>
-            <p class="quote__cn">我遇见我心所爱的。</p>
-            <cite>Song of Songs 3:4</cite>
-          </blockquote>
-
-          <blockquote class="quote fade-in">
-            <p class="quote__en">“Love is patient, love is kind.”</p>
-            <p class="quote__cn">爱是恒久忍耐，又有恩慈。</p>
-            <cite>1 Corinthians 13:4</cite>
-          </blockquote>
-
-          <blockquote class="quote fade-in">
-            <p class="quote__en">“A cord of three strands is not quickly broken.”</p>
-            <p class="quote__cn">三股合成的绳子不容易扯断。</p>
-            <cite>Ecclesiastes 4:12</cite>
-          </blockquote>
-
-          <blockquote class="quote fade-in">
-            <p class="quote__en">“What God has joined together, let no one separate.”</p>
-            <p class="quote__cn">神所配合的，人不可分开。</p>
-            <cite>Matthew 19:6</cite>
-          </blockquote>
+      <article class="chapter chapter--flip">
+        <figure class="chapter__img reveal"><img src="assets/photos/photo-25.jpg" alt="Benson and Mecki walking hand in hand down a sunny street" loading="lazy" width="1200" height="1600" /></figure>
+        <div class="chapter__text reveal">
+          <p class="chapter__no">02</p>
+          <h3>The journey <span lang="zh-Hans">同行之路</span></h3>
+          <p>Hand in hand, we have walked many roads together &mdash; and every step brought us closer.</p>
+          <p lang="zh-Hans">手牵着手走过许多路，每一步都让我们更靠近。</p>
         </div>
+      </article>
+
+      <article class="chapter">
+        <figure class="chapter__img reveal"><img src="assets/photos/photo-27.jpg" alt="Silhouette of Benson kissing Mecki on the forehead" loading="lazy" width="1200" height="1600" /></figure>
+        <div class="chapter__text reveal">
+          <p class="chapter__no">03</p>
+          <h3>Our forever <span lang="zh-Hans">永远的开始</span></h3>
+          <p>A proposal under the fireworks, a happy yes &mdash; and now, a wedding.</p>
+          <p lang="zh-Hans">烟花下的求婚，一句欢喜的“愿意”，如今，我们要步入婚礼。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- 5. FAMILY & FRIENDS + MOMENTS CAROUSEL -->
+    <section class="section friends" id="friends">
+      <figure class="friends__img reveal"><img src="assets/photos/photo-26.jpg" alt="Benson and Mecki with friends and family in Christmas headbands in front of an inflatable Santa" loading="lazy" width="1125" height="1500" /></figure>
+      <div class="section__inner reveal">
+        <p class="eyebrow">Family &amp; friends · <span lang="zh-Hans">亲友相伴</span></p>
+        <p class="lead">The people we love make every moment brighter.</p>
+        <p class="lead lead--cn" lang="zh-Hans">有所爱之人相伴，每一刻都更闪亮。</p>
       </div>
     </section>
 
+    <section class="section moments" id="moments">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Moments · <span lang="zh-Hans">点滴时光</span></p>
+        <h2 class="title">Our Photos</h2>
+      </div>
+      <div class="carousel reveal" id="carousel" tabindex="0" aria-label="Photo carousel">
+        <figure class="carousel__slide"><img src="assets/photos/photo-05-wedding.jpg" alt="Benson and Mecki in wedding attire" loading="lazy" /></figure>
+        <figure class="carousel__slide"><img src="assets/photos/photo-23.jpg" alt="Benson and Mecki with a bouquet of red roses" loading="lazy" /></figure>
+        <figure class="carousel__slide"><img src="assets/photos/photo-16.jpg" alt="Benson and Mecki standing together on a tree-lined path" loading="lazy" /></figure>
+        <figure class="carousel__slide"><img src="assets/photos/photo-17.jpg" alt="Benson and Mecki standing together on a tree-lined path" loading="lazy" /></figure>
+        <figure class="carousel__slide"><img src="assets/photos/photo-18.jpg" alt="Benson and Mecki smiling together on a tree-lined path" loading="lazy" /></figure>
+      </div>
+      <div class="carousel__dots" id="carouselDots" aria-hidden="true"></div>
+    </section>
+
+    <!-- 6. TIMELINE -->
     <section class="section timeline-section" id="timeline">
       <div class="section__inner">
-        <p class="section__eyebrow fade-in">Friday, 20 November 2026</p>
-        <h2 class="section__title fade-in">The Day</h2>
-        <p class="section__subtitle fade-in">当日流程</p>
+        <p class="eyebrow reveal">The Big Day · <span lang="zh-Hans">大日子</span></p>
+        <h2 class="title reveal">Day-of timeline</h2>
+        <p class="title-cn reveal" lang="zh-Hans">当日流程</p>
+        <p class="tl__date reveal">Friday, 20 November 2026<br /><span lang="zh-Hans">2026年11月20日 星期五</span></p>
 
         <ol class="tl">
-          <li class="tl__item fade-in">
+          <li class="tl__item reveal">
             <span class="tl__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v5M9.5 4.5h5"/><path d="M12 7l5 4v10H7V11z"/><path d="M10 21v-5a2 2 0 0 1 4 0v5"/><path d="M3 21h18"/></svg></span>
             <div class="tl__body">
               <p class="tl__time">3:30 PM</p>
               <h3 class="tl__title">Guests arrive &amp; ceremony begins</h3>
-              <p class="tl__text">Wedding ceremony led by our church pastor — about 1 hour. <span class="tl__cn">宾客入场 · 婚礼仪式</span></p>
+              <p class="tl__cn" lang="zh-Hans">宾客入场 · 婚礼仪式开始</p>
+              <p class="tl__venue">Led by our church pastor · about 1 hour</p>
             </div>
           </li>
-          <li class="tl__item fade-in">
+          <li class="tl__item reveal">
             <span class="tl__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-1 1.2 1 2 0 3.2M12 3c-1 1.2 1 2 0 3.2"/></svg></span>
             <div class="tl__body">
-              <p class="tl__time">After ceremony</p>
+              <p class="tl__time">After the ceremony</p>
               <h3 class="tl__title">Tea ceremony</h3>
-              <p class="tl__text"><span class="tl__cn">敬茶</span></p>
+              <p class="tl__cn" lang="zh-Hans">敬茶仪式</p>
             </div>
           </li>
-          <li class="tl__item fade-in">
+          <li class="tl__item reveal">
             <span class="tl__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M3.5 3v6a1.5 1.5 0 0 0 3 0V3M5 9v12M20.5 21V3c-2 1.5-2.5 4-2.5 7h2.5"/></svg></span>
             <div class="tl__body">
               <p class="tl__time">7:00 PM</p>
               <h3 class="tl__title">Wedding dinner</h3>
-              <p class="tl__text">Let’s eat, toast &amp; celebrate! <span class="tl__cn">婚宴</span></p>
+              <p class="tl__cn" lang="zh-Hans">婚宴</p>
             </div>
           </li>
-          <li class="tl__item fade-in">
+          <li class="tl__item reveal">
             <span class="tl__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg></span>
             <div class="tl__body">
               <p class="tl__time">After dinner</p>
               <h3 class="tl__title">DJ party</h3>
-              <p class="tl__text">Dance the night away. <span class="tl__cn">DJ 派对</span></p>
+              <p class="tl__cn" lang="zh-Hans">DJ 派对</p>
             </div>
           </li>
         </ol>
       </div>
     </section>
 
+    <!-- 7. LOCATION -->
     <section class="section location" id="location">
-      <div class="section__inner fade-in">
-        <p class="section__eyebrow">Where to find us</p>
-        <h2 class="section__title">Location</h2>
-        <div class="location__card">
-          <div class="location__icon" aria-hidden="true">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 21s-7-4.5-7-11a7 7 0 1 1 14 0c0 6.5-7 11-7 11z"/>
-              <circle cx="12" cy="10" r="2.5"/>
-            </svg>
-          </div>
-          <h3 class="location__name">W Factory Event Space</h3>
-          <p class="location__address">15, Jalan Lira U3/41, U 5,<br />47200 Shah Alam, Selangor</p>
-          <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=W+Factory+Event+Space%2C+15+Jalan+Lira+U3%2F41%2C+U5%2C+47200+Shah+Alam%2C+Selangor" target="_blank" rel="noopener noreferrer">
-            Open in Google Maps
-          </a>
-          <p class="location__more"><a href="https://www.wfactoryeventspace.com/wedding" target="_blank" rel="noopener noreferrer">About the venue ↗</a></p>
+      <div class="section__inner reveal">
+        <p class="eyebrow">Where to find us · <span lang="zh-Hans">地点</span></p>
+        <h2 class="title">Location</h2>
+        <span class="rule" aria-hidden="true"></span>
+        <div class="location__pin" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.5-7-11a7 7 0 1 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
         </div>
+        <h3 class="location__name">W Factory Event Space</h3>
+        <p class="location__address">15, Jalan Lira U3/41, U 5,<br />47200 Shah Alam, Selangor</p>
+        <div class="location__buttons">
+          <a class="btn btn--solid" href="https://www.google.com/maps/search/?api=1&amp;query=W+Factory+Event+Space%2C+15+Jalan+Lira+U3%2F41%2C+U5%2C+47200+Shah+Alam%2C+Selangor" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+          <a class="btn btn--line" href="https://www.wfactoryeventspace.com/wedding" target="_blank" rel="noopener noreferrer">About the venue ↗</a>
+        </div>
+      </div>
+      <div class="map reveal">
+        <iframe title="Map to W Factory Event Space" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=W+Factory+Event+Space%2C+15+Jalan+Lira+U3%2F41%2C+U5%2C+47200+Shah+Alam%2C+Selangor&amp;output=embed"></iframe>
       </div>
     </section>
 
-    <!-- RSVP: hidden until a real link is set. Enable via CONFIG.rsvp in script.js (enabled, link, deadline). -->
+    <!-- 8. RSVP: hidden until a real link is set. Enable via CONFIG.rsvp in script.js (enabled, link, deadline). -->
     <section class="section rsvp" id="rsvp" hidden>
-      <div class="section__inner fade-in">
-        <p class="section__eyebrow">Kindly reply</p>
-        <h2 class="section__title">RSVP</h2>
-        <p class="rsvp__text">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Kindly respond · <span lang="zh-Hans">敬请回复</span></p>
+        <h2 class="title">RSVP</h2>
+        <p class="lead">
           We would love to know if you can join us.<br />
           <span data-rsvp-deadline hidden>Please RSVP by <strong></strong>.</span>
         </p>
-        <a class="btn btn--primary btn--lg" data-rsvp-link href="#rsvp" target="_blank" rel="noopener noreferrer">
-          RSVP Now
-        </a>
+        <a class="btn btn--solid" data-rsvp-link href="#rsvp" target="_blank" rel="noopener noreferrer">RSVP Now <span lang="zh-Hans">确认出席</span></a>
+      </div>
+    </section>
+
+    <!-- 9. SAVE TO CALENDAR -->
+    <section class="section calendar" id="calendar">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Save the date · <span lang="zh-Hans">加入日历</span></p>
+        <h2 class="title">Save to Calendar</h2>
+        <span class="rule" aria-hidden="true"></span>
+        <p class="lead">Friday, 20 November 2026, 3:30 PM</p>
+        <div class="location__buttons">
+          <a class="btn btn--solid" id="gcalLink" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Benson+%26+Mecki+Wedding&amp;dates=20261120T073000Z%2F20261120T150000Z&amp;ctz=Asia%2FKuala_Lumpur&amp;details=Wedding+of+Benson+%26+Mecki.+Ceremony+at+3%3A30+PM%2C+tea+ceremony%2C+wedding+dinner+at+7%3A00+PM+and+DJ+party.&amp;location=W+Factory+Event+Space%2C+15+Jalan+Lira+U3%2F41%2C+U5%2C+47200+Shah+Alam%2C+Selangor" target="_blank" rel="noopener noreferrer">Google Calendar</a>
+          <a class="btn btn--line" href="assets/benson-mecki-wedding.ics" download="benson-mecki-wedding.ics">Apple / Outlook (.ics)</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="footer__inner fade-in">
-      <div class="footer__divider" aria-hidden="true"><span></span></div>
-      <p class="footer__love">With love</p>
-      <p class="footer__names">Benson &amp; Mecki</p>
-      <p class="footer__date">20 November 2026 (Friday)</p>
-      <a class="footer__top" href="#top">Back to top</a>
+    <div class="footer__inner reveal">
+      <p class="footer__names">Benson <span>&amp;</span> Mecki</p>
+      <p class="footer__date">20 November 2026 (Friday) · 3:30 PM</p>
+      <p class="footer__venue">W Factory Event Space, Shah Alam</p>
+      <p class="footer__love">Made with love · <span lang="zh-Hans">因爱而聚</span></p>
     </div>
   </footer>
-
-
-  <div class="lightbox" id="lightbox" hidden>
-    <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
-    <img class="lightbox__img" id="lightboxImg" alt="" />
-  </div>
 
   <script src="script.js"></script>
 </body>

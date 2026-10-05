@@ -1,123 +1,45 @@
 # Benson & Mecki — Wedding E-Invitation
 
-A polished, mobile-first static wedding invitation for **Benson Lok & Mecki Tan**.
+Mobile-first static wedding invitation (bilingual English + 简体中文).
 
-- Cream / ivory, burgundy / rose, soft gold
-- Google Fonts: Great Vibes + Cormorant Garamond (+ Noto Serif SC)
-- Countdown timer, scroll fade-ins, WhatsApp-friendly layout
-- No npm, no backend — plain HTML / CSS / JS
+**Live site:** https://www.sensify.my/invite/
 
-## Live site
+## Page flow
 
-**https://www.sensify.my/invite/**
+1. Full-bleed hero (date, names, countdown to the 3:30 PM ceremony)
+2. "We are getting married" intro
+3. Short story + "read more"
+4. Three photo chapters (everyday moments · the journey · our forever)
+5. Family & friends, photo carousel
+6. Day-of timeline (ceremony, tea ceremony, dinner, DJ party)
+7. Location with map, Google Maps button and venue link
+8. RSVP (hidden until enabled) 
+9. Save to Calendar (Google Calendar link + `assets/benson-mecki-wedding.ics`)
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `index.html` | All invitation sections & placeholders |
-| `styles.css` | Theme, layout, animations |
-| `script.js` | Countdown (`CONFIG.weddingISO`) + fade-ins |
-| `README.md` | This guide |
+| `index.html` | Page content |
+| `styles.css` | Theme and layout |
+| `script.js` | Countdown, scroll reveal, menu, carousel, RSVP switch (`CONFIG`) |
+| `assets/photos/` | Photos (resized, JPEG) |
+| `assets/benson-mecki-wedding.ics` | Calendar file (20 Nov 2026, 3:30 PM MYT) |
 
-## How to edit placeholders
+## RSVP
 
-There are no bracketed placeholders left in `index.html`. The **RSVP section is hidden** until you have a real link. To turn it on, edit `CONFIG.rsvp` in `script.js`:
+The RSVP section is hidden. To enable it, edit `CONFIG.rsvp` in `script.js`:
 
 ```js
 rsvp: {
   enabled: true,
   link: "https://…",            // Google Form / WhatsApp link
-  deadline: "1 November 2026",  // optional; leave "" to omit the deadline line
+  deadline: "1 November 2026",  // optional; "" to omit
 },
-```
-
-Also update the countdown date in `script.js`:
-
-```js
-const CONFIG = {
-  // Replace with your real wedding date/time (ISO 8601 + timezone)
-  weddingISO: "2026-11-20T15:30:00+08:00",
-};
-```
-
-Example for Malaysia (UTC+8):
-
-```js
-weddingISO: "2026-11-20T15:30:00+08:00",
-```
-
-Optional: add an Open Graph image and set `og:image` / `og:url` in `index.html` for nicer WhatsApp / Messenger previews.
-
-
-## Photos
-
-Place JPEGs in `assets/photos/` named:
-
-```
-photo-16.jpg
-photo-17.jpg
-…
-```
-
-The page auto-discovers them for:
-
-1. **Hero background** — prefers `CONFIG.heroPhoto` in `script.js` (set to a romantic couple shot), otherwise the first photo found. Falls back to the burgundy gradient if the folder is empty.
-2. **Gallery** — shown only when at least one photo loads; otherwise the section stays hidden.
-
-```js
-heroPhoto: "photo-03.jpg", // romantic couple shot
 ```
 
 ## Local preview
 
-Open `index.html` in a browser, or serve the folder:
-
 ```bash
-# Python
-python3 -m http.server 8080
-
-# Or any static file server pointed at this directory
+python3 -m http.server 8000   # then open http://localhost:8000
 ```
-
-Then visit `http://localhost:8080`.
-
-## Deploy to GitHub Pages
-
-### First-time setup (already done if you followed the create flow)
-
-```bash
-git init
-git add .
-git commit -m "Initial wedding invitation"
-gh repo create wedding --public --source=. --remote=origin --push
-```
-
-Enable Pages from the `main` branch root:
-
-```bash
-gh api repos/bensonlok/wedding/pages \
-  -X POST \
-  -H "Accept: application/vnd.github+json" \
-  -f build_type=legacy \
-  -f source='{"branch":"main","path":"/"}'
-```
-
-Or in the GitHub UI: **Settings → Pages → Source: Deploy from a branch → Branch: `main` / `/ (root)` → Save**.
-
-Site URL: **https://www.sensify.my/invite/**
-
-### Updating later
-
-```bash
-# Edit placeholders / styles / script
-git add .
-git commit -m "Update wedding details"
-git push
-```
-
-Pages rebuilds automatically within a minute or two.
-
-## Licence
-
-Personal wedding invitation — all rights reserved by Benson Lok & Mecki Tan.

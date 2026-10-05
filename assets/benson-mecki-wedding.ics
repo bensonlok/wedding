@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Benson and Mecki//Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:benson-mecki-wedding-20261120@sensify.my
+DTSTAMP:20261005T000000Z
+DTSTART:20261120T073000Z
+DTEND:20261120T150000Z
+SUMMARY:Benson & Mecki Wedding
+DESCRIPTION:Wedding of Benson & Mecki. Ceremony at 3:30 PM\, tea ceremony\, wedding dinner at 7:00 PM and DJ party.
+LOCATION:W Factory Event Space\, 15 Jalan Lira U3/41\, U 5\, 47200 Shah Alam\, Selangor
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Benson & Mecki Wedding tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

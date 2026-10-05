@@ -1,23 +1,11 @@
 /**
  * Benson & Mecki — Wedding Invitation
- * Countdown + scroll fade-ins + photo hero/gallery
+ * Countdown, scroll reveal, menu, photo carousel, optional RSVP.
  */
 
 const CONFIG = {
-  // TODO: Replace with your real wedding date/time (ISO 8601 with timezone).
-  // Example for Malaysia (UTC+8): '2026-11-22T17:00:00+08:00'
+  // Ceremony start: Friday 20 November 2026, 3:30 PM Malaysia time (UTC+8)
   weddingISO: "2026-11-20T15:30:00+08:00",
-
-  // Photo folder (relative to this page). Files named photo-NN.jpg (gaps in numbering are fine)
-  photoDir: "assets/photos/",
-  photoPrefix: "photo-",
-  photoExt: ".jpg",
-  maxPhotos: 36,
-
-  // Prefer a romantic couple shot for the hero.
-  // Set to a specific filename (e.g. "photo-03.jpg") once you pick one,
-  // or leave null to auto-pick the first available photo.
-  heroPhoto: "photo-05-wedding.jpg", // groom & bride in wedding attire (AI-enhanced)
 
   // RSVP block is hidden until a real link is provided.
   // To enable: set enabled: true and fill in link (and optionally deadline, e.g. "1 November 2026").
@@ -26,24 +14,14 @@ const CONFIG = {
     link: "",
     deadline: "",
   },
-
-  // Photos (by filename) shown double-width in the grid (landscape shots only; none right now)
-  wideNames: [],
-
-  // Optional crop focus (CSS object-position) per photo so faces stay in frame
-  focus: {},
 };
 
 /* ----- Countdown ----- */
 (function initCountdown() {
   const root = document.getElementById("countdown");
   if (!root) return;
-
   const target = new Date(CONFIG.weddingISO);
-  if (Number.isNaN(target.getTime())) {
-    console.warn("[wedding] Invalid CONFIG.weddingISO — countdown disabled.");
-    return;
-  }
+  if (Number.isNaN(target.getTime())) return;
 
   const els = {
     days: root.querySelector('[data-unit="days"]'),
@@ -51,210 +29,93 @@ const CONFIG = {
     mins: root.querySelector('[data-unit="mins"]'),
     secs: root.querySelector('[data-unit="secs"]'),
   };
-
-  function pad(n) {
-    return String(Math.max(0, n)).padStart(2, "0");
-  }
+  const pad = (n) => String(Math.max(0, n)).padStart(2, "0");
 
   function tick() {
-    const now = Date.now();
-    let diff = target.getTime() - now;
-
+    let diff = target.getTime() - Date.now();
     if (diff <= 0) {
-      els.days.textContent = "00";
-      els.hours.textContent = "00";
-      els.mins.textContent = "00";
-      els.secs.textContent = "00";
-      root.setAttribute("aria-label", "The wedding day has arrived");
+      Object.values(els).forEach((el) => (el.textContent = "00"));
       return;
     }
-
-    const days = Math.floor(diff / 86400000);
-    diff -= days * 86400000;
-    const hours = Math.floor(diff / 3600000);
-    diff -= hours * 3600000;
-    const mins = Math.floor(diff / 60000);
-    diff -= mins * 60000;
+    const days = Math.floor(diff / 86400000); diff -= days * 86400000;
+    const hours = Math.floor(diff / 3600000); diff -= hours * 3600000;
+    const mins = Math.floor(diff / 60000); diff -= mins * 60000;
     const secs = Math.floor(diff / 1000);
-
     els.days.textContent = pad(days);
     els.hours.textContent = pad(hours);
     els.mins.textContent = pad(mins);
     els.secs.textContent = pad(secs);
   }
-
   tick();
   setInterval(tick, 1000);
 })();
 
-/* ----- Scroll fade-ins ----- */
-function revealFadeIns(scope) {
-  const root = scope || document;
-  const nodes = root.querySelectorAll
-    ? root.querySelectorAll(".fade-in:not(.is-visible)")
-    : [];
-  // Also support single element
-  const list =
-    scope && scope.classList && scope.classList.contains("fade-in")
-      ? [scope, ...nodes]
-      : [...nodes];
-
-  if (!list.length) return;
-
+/* ----- Scroll reveal ----- */
+(function initReveal() {
+  const items = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {
-    list.forEach((el) => el.classList.add("is-visible"));
+    items.forEach((el) => el.classList.add("in"));
     return;
   }
-
-  const observer = new IntersectionObserver(
+  const io = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
   );
-
-  list.forEach((el) => observer.observe(el));
-}
-
-(function initFadeIns() {
-  revealFadeIns(document);
+  items.forEach((el) => io.observe(el));
 })();
 
-/* ----- Smooth-scroll for in-page links (iOS-friendly) ----- */
-(function initSmoothAnchors() {
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const id = link.getAttribute("href");
-      if (!id || id === "#") return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
+/* ----- Top bar + menu ----- */
+(function initMenu() {
+  const bar = document.getElementById("topbar");
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("menu");
+  if (!bar || !btn || !menu) return;
+
+  function onScroll() {
+    bar.classList.toggle("is-solid", window.scrollY > window.innerHeight * 0.6);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  function setOpen(open) {
+    menu.hidden = !open;
+    btn.setAttribute("aria-expanded", String(open));
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.classList.toggle("menu-open", open);
+  }
+  btn.addEventListener("click", () => setOpen(menu.hidden));
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
 })();
 
-/* ----- Photos: hero + gallery (graceful if folder empty) ----- */
-(function initPhotos() {
-  const hero = document.querySelector(".hero");
-  const heroBg = document.getElementById("heroBg");
-  const gallerySection = document.getElementById("gallery");
-  const galleryGrid = document.getElementById("galleryGrid");
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-  const lightboxClose = document.getElementById("lightboxClose");
+/* ----- Photo carousel dots ----- */
+(function initCarousel() {
+  const car = document.getElementById("carousel");
+  const dotsWrap = document.getElementById("carouselDots");
+  if (!car || !dotsWrap) return;
+  const slides = Array.from(car.children);
+  slides.forEach(() => dotsWrap.appendChild(document.createElement("i")));
+  const dots = Array.from(dotsWrap.children);
 
-  function pad2(n) {
-    return String(n).padStart(2, "0");
-  }
-
-  function probe(src) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve(src);
-      img.onerror = () => resolve(null);
-      img.src = src;
+  function update() {
+    const mid = car.scrollLeft + car.clientWidth / 2;
+    let best = 0, bestDist = Infinity;
+    slides.forEach((s, i) => {
+      const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid);
+      if (d < bestDist) { best = i; bestDist = d; }
     });
+    dots.forEach((d, i) => d.classList.toggle("on", i === best));
   }
-
-  async function discoverPhotos() {
-    // Probe every candidate number in parallel, so gaps in numbering (removed photos) are fine.
-    const names = [];
-    for (let i = 1; i <= CONFIG.maxPhotos; i++) {
-      names.push(CONFIG.photoPrefix + pad2(i) + CONFIG.photoExt);
-    }
-    const results = await Promise.all(names.map((name) => probe(CONFIG.photoDir + name)));
-    const found = [];
-    names.forEach((name, i) => {
-      if (results[i]) found.push({ name, src: CONFIG.photoDir + name });
-    });
-    return found;
-  }
-
-  function setHero(src) {
-    if (!hero || !heroBg || !src) return;
-    heroBg.style.backgroundImage = 'url("' + src + '")';
-    hero.classList.add("has-photo");
-  }
-
-  function openLightbox(src, alt) {
-    if (!lightbox || !lightboxImg) return;
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || "Wedding photo";
-    lightbox.hidden = false;
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeLightbox() {
-    if (!lightbox || !lightboxImg) return;
-    lightbox.hidden = true;
-    lightboxImg.src = "";
-    document.body.style.overflow = "";
-  }
-
-  if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
-  if (lightbox) {
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-  }
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeLightbox();
-  });
-
-  function renderGallery(photos) {
-    if (!gallerySection || !galleryGrid || !photos.length) return;
-    galleryGrid.innerHTML = "";
-    photos.forEach((photo, idx) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "gallery__item fade-in";
-      if ((CONFIG.wideNames || []).includes(photo.name)) {
-        btn.classList.add("gallery__item--wide");
-      }
-      if (CONFIG.focus && CONFIG.focus[photo.name]) {
-        btn.style.setProperty("--focus", CONFIG.focus[photo.name]);
-      }
-      btn.setAttribute("aria-label", "View photo " + (idx + 1));
-      const img = document.createElement("img");
-      img.src = photo.src;
-      img.alt = "Benson & Mecki — photo " + (idx + 1);
-      img.loading = "lazy";
-      img.decoding = "async";
-      btn.appendChild(img);
-      btn.addEventListener("click", () => openLightbox(photo.src, img.alt));
-      galleryGrid.appendChild(btn);
-    });
-    gallerySection.hidden = false;
-    revealFadeIns(gallerySection);
-  }
-
-  discoverPhotos().then((photos) => {
-    if (!photos.length) {
-      // Graceful fallback: keep gradient hero, hide gallery
-      console.info("[wedding] No photos found in " + CONFIG.photoDir + " — using gradient hero.");
-      return;
-    }
-
-    let heroSrc = photos[0] ? photos[0].src : null;
-    if (CONFIG.heroPhoto) {
-      const match = photos.find((p) => p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto));
-      heroSrc = match ? match.src : (CONFIG.photoDir + CONFIG.heroPhoto);
-    }
-    if (heroSrc) setHero(heroSrc);
-    // Hero photo goes first in the gallery; remaining photos follow in numeric order
-    // (photo-05-wedding.jpg is not auto-discovered, so it is added explicitly if it is the hero)
-    const isHero = (p) => CONFIG.heroPhoto && (p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto));
-    const heroItem = photos.find(isHero) || (CONFIG.heroPhoto ? { name: CONFIG.heroPhoto, src: CONFIG.photoDir + CONFIG.heroPhoto } : null);
-    const galleryPhotos = photos.filter((p) => !isHero(p));
-    if (heroItem) galleryPhotos.unshift(heroItem);
-    renderGallery(galleryPhotos);
-  });
+  car.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+  window.addEventListener("resize", update);
+  update();
 })();
 
 /* ----- RSVP (hidden unless CONFIG.rsvp.enabled and a link is set) ----- */
@@ -265,12 +126,9 @@ function revealFadeIns(scope) {
   const btn = section.querySelector("[data-rsvp-link]");
   if (btn) btn.setAttribute("href", cfg.link);
   const deadlineEl = section.querySelector("[data-rsvp-deadline]");
-  if (deadlineEl) {
-    if (cfg.deadline) {
-      deadlineEl.querySelector("strong").textContent = cfg.deadline;
-      deadlineEl.hidden = false;
-    }
+  if (deadlineEl && cfg.deadline) {
+    deadlineEl.querySelector("strong").textContent = cfg.deadline;
+    deadlineEl.hidden = false;
   }
   section.hidden = false;
-  revealFadeIns(section);
 })();
