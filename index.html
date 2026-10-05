@@ -34,6 +34,7 @@
     <a href="#moments">Moments <em>点滴时光</em></a>
     <a href="#timeline">The Day <em>当日流程</em></a>
     <a href="#location">Location <em>地点</em></a>
+    <a href="#rsvp">RSVP <em>确认出席</em></a>
     <a href="#calendar">Save to Calendar <em>加入日历</em></a>
   </nav>
 
@@ -69,7 +70,8 @@
         <p class="lead">We would be so happy to celebrate this day with you.</p>
         <p class="lead lead--cn" lang="zh-Hans">诚挚邀请您与我们一同见证这美好的一天。</p>
         <div class="intro__cta">
-          <a class="btn btn--solid" href="#timeline">See the day</a>
+          <a class="btn btn--solid" href="#rsvp">RSVP</a>
+          <a class="btn btn--line" href="#timeline">See the day</a>
           <a class="btn btn--line" href="#calendar">Save the date</a>
         </div>
       </div>
@@ -218,7 +220,7 @@
       </div>
     </section>
 
-    <!-- 8. RSVP: hidden until a real link is set. Enable via CONFIG.rsvp in script.js (enabled, link, deadline). -->
+    <!-- 8. RSVP: shown when CONFIG.rsvp.enabled. Submissions go to Supabase (Benson views in dashboard). -->
     <section class="section rsvp" id="rsvp" hidden>
       <div class="section__inner reveal">
         <p class="eyebrow">Kindly respond · <span lang="zh-Hans">敬请回复</span></p>
@@ -227,7 +229,39 @@
           We would love to know if you can join us.<br />
           <span data-rsvp-deadline hidden>Please RSVP by <strong></strong>.</span>
         </p>
-        <a class="btn btn--solid" data-rsvp-link href="#rsvp" target="_blank" rel="noopener noreferrer">RSVP Now <span lang="zh-Hans">确认出席</span></a>
+
+        <form class="rsvp-form" id="rsvpForm" novalidate>
+          <label class="rsvp-form__field">
+            <span>Your name <abbr title="required">*</abbr></span>
+            <input type="text" name="name" autocomplete="name" required maxlength="120" placeholder="Full name" />
+          </label>
+
+          <fieldset class="rsvp-form__field rsvp-form__attendance">
+            <legend>Will you attend? <abbr title="required">*</abbr></legend>
+            <label><input type="radio" name="attendance" value="yes" required /> Yes, I will be there</label>
+            <label><input type="radio" name="attendance" value="no" /> Sorry, I cannot make it</label>
+            <label><input type="radio" name="attendance" value="maybe" /> Maybe / not sure yet</label>
+          </fieldset>
+
+          <label class="rsvp-form__field">
+            <span>Number of guests <abbr title="required">*</abbr></span>
+            <input type="number" name="guest_count" min="0" max="20" value="1" required inputmode="numeric" />
+            <small>Including yourself. Use 0 if you cannot attend.</small>
+          </label>
+
+          <label class="rsvp-form__field">
+            <span>Phone <em>(optional)</em></span>
+            <input type="tel" name="phone" autocomplete="tel" maxlength="40" placeholder="Mobile number" />
+          </label>
+
+          <label class="rsvp-form__field">
+            <span>Message <em>(optional)</em></span>
+            <textarea name="message" rows="3" maxlength="1000" placeholder="A note for Benson &amp; Mecki"></textarea>
+          </label>
+
+          <button class="btn btn--solid" type="submit" id="rsvpSubmit">Send RSVP</button>
+          <p class="rsvp-form__status" id="rsvpStatus" role="status" aria-live="polite" hidden></p>
+        </form>
       </div>
     </section>
 
