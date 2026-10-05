@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="no-referrer" />
+  <title>RSVP responses · Benson &amp; Mecki</title>
+  <link rel="icon" href="data:," />
+  <style>
+    :root { --bg:#fbf7f1; --card:#fff; --ink:#3a2a2e; --muted:#7a666b; --burgundy:#7b2d3e; --deep:#4f1a28; --gold:#b99a52; --yes:#2f7d4f; --no:#a33a3a; --maybe:#b07d1a; --line:#eadfd3; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--ink); -webkit-text-size-adjust:100%; }
+    header { background:var(--deep); color:#fff; padding:1rem 1.1rem; position:sticky; top:0; z-index:5; display:flex; align-items:center; justify-content:space-between; gap:.6rem; }
+    header h1 { margin:0; font-size:1.05rem; font-weight:600; }
+    header small { display:block; opacity:.75; font-weight:400; font-size:.75rem; }
+    main { max-width:760px; margin:0 auto; padding:1rem; }
+    button, .btn { font:inherit; border:0; border-radius:999px; padding:.6rem 1rem; cursor:pointer; background:var(--burgundy); color:#fff; font-weight:600; font-size:.85rem; }
+    .btn--ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.5); }
+    .btn--light { background:#fff; color:var(--burgundy); border:1px solid var(--line); }
+    .login { background:var(--card); border-radius:16px; padding:1.4rem; margin-top:2rem; box-shadow:0 6px 24px rgba(79,26,40,.08); }
+    .login h2 { margin:0 0 .4rem; font-size:1.2rem; color:var(--burgundy); }
+    .login p { margin:0 0 1rem; color:var(--muted); font-size:.9rem; }
+    .login input { width:100%; font:inherit; font-size:1.1rem; padding:.8rem 1rem; border:1px solid var(--line); border-radius:12px; margin-bottom:.8rem; letter-spacing:.08em; }
+    .login button { width:100%; padding:.85rem; font-size:1rem; }
+    .err { color:var(--no); font-size:.9rem; min-height:1.2em; margin:.6rem 0 0; }
+    .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:.6rem; }
+    .stat { background:var(--card); border-radius:14px; padding:.9rem; box-shadow:0 2px 10px rgba(79,26,40,.06); }
+    .stat b { display:block; font-size:1.8rem; line-height:1.1; }
+    .stat span { font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    .stat--big { grid-column:1 / -1; background:var(--burgundy); color:#fff; }
+    .stat--big span { color:rgba(255,255,255,.8); }
+    .stat--yes b { color:var(--yes); } .stat--no b { color:var(--no); } .stat--maybe b { color:var(--maybe); }
+    .toolbar { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin:1.1rem 0 .6rem; }
+    .toolbar select, .toolbar input { font:inherit; font-size:.9rem; padding:.55rem .8rem; border:1px solid var(--line); border-radius:999px; background:#fff; }
+    .toolbar input { flex:1; min-width:140px; }
+    .meta { font-size:.78rem; color:var(--muted); margin:.2rem 0 .8rem; }
+    .list { display:flex; flex-direction:column; gap:.6rem; padding:0; margin:0; list-style:none; }
+    .item { background:var(--card); border-radius:14px; padding:.9rem 1rem; box-shadow:0 2px 10px rgba(79,26,40,.05); border-left:4px solid var(--line); }
+    .item--yes { border-left-color:var(--yes); } .item--no { border-left-color:var(--no); } .item--maybe { border-left-color:var(--maybe); }
+    .row1 { display:flex; justify-content:space-between; gap:.6rem; align-items:baseline; }
+    .name { font-weight:600; font-size:1.02rem; word-break:break-word; }
+    .pill { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:.2rem .55rem; border-radius:999px; white-space:nowrap; }
+    .pill--yes { background:#e3f2e8; color:var(--yes); } .pill--no { background:#f7e3e3; color:var(--no); } .pill--maybe { background:#f8eed8; color:var(--maybe); }
+    .details { font-size:.88rem; color:var(--muted); margin-top:.35rem; display:flex; flex-wrap:wrap; gap:.3rem 1rem; }
+    .details a { color:var(--burgundy); }
+    .msg { margin:.5rem 0 0; font-size:.92rem; background:var(--bg); border-radius:10px; padding:.55rem .7rem; white-space:pre-wrap; word-break:break-word; }
+    .empty { text-align:center; color:var(--muted); padding:2rem 1rem; }
+    [hidden] { display:none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RSVP responses <small>Benson &amp; Mecki · 20 Nov 2026</small></h1>
+    <button class="btn btn--ghost" id="logoutBtn" type="button" hidden>Lock</button>
+  </header>
+
+  <main>
+    <section class="login" id="loginView" hidden>
+      <h2>Private page</h2>
+      <p>Enter the passcode to view replies. This device will remember it.</p>
+      <form id="loginForm" autocomplete="off">
+        <input id="passInput" type="password" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Passcode" required maxlength="100" />
+        <button type="submit" id="loginBtn">View responses</button>
+        <p class="err" id="loginErr" role="alert"></p>
+      </form>
+    </section>
+
+    <section id="dataView" hidden>
+      <div class="stats">
+        <div class="stat stat--big"><b id="sGuests">0</b><span>Guests attending (Yes)</span></div>
+        <div class="stat stat--yes"><b id="sYes">0</b><span>Yes</span></div>
+        <div class="stat stat--no"><b id="sNo">0</b><span>No</span></div>
+        <div class="stat stat--maybe"><b id="sMaybe">0</b><span>Maybe · <i id="sMaybeGuests">0</i> guests</span></div>
+        <div class="stat"><b id="sTotal">0</b><span>Total replies</span></div>
+      </div>
+
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search name, phone, message" />
+        <select id="filter" aria-label="Filter">
+          <option value="all">All</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="maybe">Maybe</option>
+        </select>
+        <button class="btn btn--light" id="refreshBtn" type="button">Refresh</button>
+        <button id="csvBtn" type="button">Download CSV</button>
+      </div>
+      <p class="meta" id="meta"></p>
+      <ul class="list" id="list"></ul>
+      <p class="empty" id="empty" hidden>No responses yet.</p>
+    </section>
+  </main>
+
+  <script>
+  (function () {
+    // Public, insert/RPC-only key. Reading replies requires the passcode, which is checked server-side.
+    var SUPABASE_URL = "https://aukotwzggfpmepbkglro.supabase.co";
+    var ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1a290d3pnZ2ZwbWVwYmtnbHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNjQ4MzgsImV4cCI6MjEwNTk0MDgzOH0.iF8vSE1s4gpQxxBQOytzZJ2o02tfHlaKyL_nc2lbzmM";
+    var STORE_KEY = "bm_rsvp_viewer_pass";
+
+    var $ = function (id) { return document.getElementById(id); };
+    var rows = [];
+
+    var fmt = new Intl.DateTimeFormat("en-MY", {
+      timeZone: "Asia/Kuala_Lumpur", day: "numeric", month: "short", year: "numeric",
+      hour: "numeric", minute: "2-digit", hour12: true
+    });
+    function myt(iso) { try { return fmt.format(new Date(iso)) + " MYT"; } catch (e) { return iso; } }
+    function label(a) { return a === "yes" ? "Yes" : a === "no" ? "No" : a === "maybe" ? "Maybe" : a; }
+
+    function el(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
+
+    function showLogin(msg) {
+      $("dataView").hidden = true; $("logoutBtn").hidden = true;
+      $("loginView").hidden = false; $("loginErr").textContent = msg || "";
+      $("passInput").value = ""; setTimeout(function () { $("passInput").focus(); }, 50);
+    }
+
+    async function load(pass, fromLogin) {
+      var btn = fromLogin ? $("loginBtn") : $("refreshBtn");
+      var prev = btn.textContent; btn.disabled = true; btn.textContent = "Loading…";
+      try {
+        var res = await fetch(SUPABASE_URL + "/rest/v1/rpc/get_wedding_rsvps", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", apikey: ANON_KEY, Authorization: "Bearer " + ANON_KEY },
+          body: JSON.stringify({ passcode: pass })
+        });
+        var data = await res.json();
+        if (!res.ok) throw new Error((data && data.message) || ("HTTP " + res.status));
+        if (data && data.error) {
+          localStorage.removeItem(STORE_KEY);
+          showLogin(data.error === "locked" ? "Too many wrong attempts. Please wait 10 minutes." : "Incorrect passcode.");
+          return;
+        }
+        localStorage.setItem(STORE_KEY, pass);
+        render(data);
+      } catch (err) {
+        console.error(err);
+        if (fromLogin) $("loginErr").textContent = "Could not connect. Please try again.";
+        else $("meta").textContent = "Could not refresh. Check your connection.";
+      } finally {
+        btn.disabled = false; btn.textContent = prev;
+      }
+    }
+
+    function render(data) {
+      var t = data.totals || {};
+      $("sGuests").textContent = t.guests_attending || 0;
+      $("sYes").textContent = t.yes || 0;
+      $("sNo").textContent = t.no || 0;
+      $("sMaybe").textContent = t.maybe || 0;
+      $("sMaybeGuests").textContent = t.guests_maybe || 0;
+      $("sTotal").textContent = t.responses || 0;
+      rows = data.rows || [];
+      $("loginView").hidden = true; $("dataView").hidden = false; $("logoutBtn").hidden = false;
+      $("meta").textContent = "Updated " + myt(new Date().toISOString()) + " · newest first";
+      drawList();
+    }
+
+    function drawList() {
+      var q = $("search").value.trim().toLowerCase();
+      var f = $("filter").value;
+      var list = $("list"); list.innerHTML = "";
+      var shown = rows.filter(function (r) {
+        if (f !== "all" && r.attendance !== f) return false;
+        if (!q) return true;
+        return [r.name, r.phone, r.message].join(" ").toLowerCase().indexOf(q) !== -1;
+      });
+      shown.forEach(function (r) {
+        var li = el("li", "item item--" + r.attendance);
+        var row1 = el("div", "row1");
+        row1.appendChild(el("span", "name", r.name));
+        row1.appendChild(el("span", "pill pill--" + r.attendance, label(r.attendance)));
+        li.appendChild(row1);
+        var d = el("div", "details");
+        d.appendChild(el("span", null, "Guests: " + r.guest_count));
+        if (r.phone) {
+          var a = el("a", null, r.phone);
+          a.href = "tel:" + String(r.phone).replace(/[^0-9+]/g, "");
+          var ps = el("span", null, "Phone: "); ps.appendChild(a); d.appendChild(ps);
+        }
+        d.appendChild(el("span", null, myt(r.created_at)));
+        li.appendChild(d);
+        if (r.message) li.appendChild(el("p", "msg", r.message));
+        list.appendChild(li);
+      });
+      $("empty").hidden = shown.length > 0;
+      $("empty").textContent = rows.length ? "No matches." : "No responses yet.";
+    }
+
+    function csvCell(v) {
+      var s = v == null ? "" : String(v);
+      if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;          // avoid spreadsheet formula injection
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    function downloadCsv() {
+      var head = ["Time (MYT)", "Name", "Attendance", "Guests", "Phone", "Message"];
+      var lines = [head.map(csvCell).join(",")];
+      rows.forEach(function (r) {
+        lines.push([myt(r.created_at), r.name, label(r.attendance), r.guest_count, r.phone, r.message].map(csvCell).join(","));
+      });
+      var blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "wedding-rsvp-" + new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kuala_Lumpur" }).format(new Date()) + ".csv";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    }
+
+    $("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var p = $("passInput").value.trim();
+      if (p) load(p, true);
+    });
+    $("refreshBtn").addEventListener("click", function () {
+      var p = localStorage.getItem(STORE_KEY); if (p) load(p, false); else showLogin();
+    });
+    $("logoutBtn").addEventListener("click", function () { localStorage.removeItem(STORE_KEY); rows = []; showLogin(); });
+    $("search").addEventListener("input", drawList);
+    $("filter").addEventListener("change", drawList);
+    $("csvBtn").addEventListener("click", downloadCsv);
+
+    var saved = localStorage.getItem(STORE_KEY);
+    if (saved) { $("loginView").hidden = true; load(saved, false).then(function () { if ($("dataView").hidden && $("loginView").hidden) showLogin(); }); }
+    else showLogin();
+  })();
+  </script>
+</body>
+</html>
