@@ -2,8 +2,6 @@
 
 A polished, mobile-first static wedding invitation for **Benson Lok & Mecki Tan**.
 
-Inspired by [chester050.github.io/wedding](https://chester050.github.io/wedding/).
-
 - Cream / ivory, burgundy / rose, soft gold
 - Google Fonts: Great Vibes + Cormorant Garamond (+ Noto Serif SC)
 - Countdown timer, scroll fade-ins, WhatsApp-friendly layout
@@ -11,9 +9,7 @@ Inspired by [chester050.github.io/wedding](https://chester050.github.io/wedding/
 
 ## Live site
 
-After GitHub Pages is enabled:
-
-**https://bensonlok.github.io/wedding/**
+**https://www.sensify.my/invite/**
 
 ## Files
 
@@ -26,34 +22,27 @@ After GitHub Pages is enabled:
 
 ## How to edit placeholders
 
-Open `index.html` and search for bracketed tokens. Replace each one with your real details:
+Open `index.html` and search for bracketed tokens (only the RSVP ones remain; timeline, venue and story are filled in). Replace each one with your real details:
 
 | Placeholder | Where | Example |
 |-------------|-------|---------|
 | `[WEDDING DATE]` | Hero, footer, OG description | `22 November 2026 (Sunday)` |
-| `[GUEST ARRIVAL TIME]` | Timeline | `04:30 PM` |
-| `[CEREMONY TIME]` | Timeline | `05:00 PM` |
-| `[DINNER TIME]` | Timeline | `07:00 PM` |
-| `[VENUE NAME]` | Location | `FGA KL` |
-| `[VENUE ADDRESS]` | Location | Full street address |
-| `[MAP LINK]` | Location button `href` | Google Maps / Waze URL |
 | `[RSVP LINK]` | RSVP button `href` | Google Form / WhatsApp link |
 | `[RSVP DEADLINE]` | RSVP section | `1 November 2026` |
-| `[STORY]` | Three story cards | Your story paragraphs |
 
 Also update the countdown date in `script.js`:
 
 ```js
 const CONFIG = {
   // Replace with your real wedding date/time (ISO 8601 + timezone)
-  weddingISO: "2026-11-20T17:00:00+08:00",
+  weddingISO: "2026-11-20T15:30:00+08:00",
 };
 ```
 
 Example for Malaysia (UTC+8):
 
 ```js
-weddingISO: "2026-11-20T17:00:00+08:00",
+weddingISO: "2026-11-20T15:30:00+08:00",
 ```
 
 Optional: add an Open Graph image and set `og:image` / `og:url` in `index.html` for nicer WhatsApp / Messenger previews.
@@ -114,7 +103,7 @@ gh api repos/bensonlok/wedding/pages \
 
 Or in the GitHub UI: **Settings → Pages → Source: Deploy from a branch → Branch: `main` / `/ (root)` → Save**.
 
-Site URL: **https://bensonlok.github.io/wedding/**
+Site URL: **https://www.sensify.my/invite/**
 
 ### Updating later
 

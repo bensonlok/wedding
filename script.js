@@ -6,7 +6,7 @@
 const CONFIG = {
   // TODO: Replace with your real wedding date/time (ISO 8601 with timezone).
   // Example for Malaysia (UTC+8): '2026-11-22T17:00:00+08:00'
-  weddingISO: "2026-11-20T17:00:00+08:00",
+  weddingISO: "2026-11-20T15:30:00+08:00",
 
   // Photo folder (relative to this page). Files expected: photo-01.jpg … photo-N.jpg
   photoDir: "assets/photos/",
@@ -19,8 +19,18 @@ const CONFIG = {
   // or leave null to auto-pick the first available photo.
   heroPhoto: "photo-05-wedding.jpg", // AI-enhanced wedding attire (Gemini)
 
-  // Index (0-based among found photos) to make wide in the grid
-  wideIndexes: [2, 4, 9], // boat heart, roses kiss, dress fitting
+  // Photos (by filename) shown double-width in the grid (landscape shots)
+  wideNames: ["photo-03.jpg", "photo-19.jpg"], // boat heart, Japan lawn
+
+  // Optional crop focus (CSS object-position) per photo so faces stay in frame
+  focus: {
+    "photo-20.jpg": "center 80%", // fireworks toast
+    "photo-21.jpg": "center 40%", // smiling at pink fireworks
+    "photo-22.jpg": "center 70%", // champagne toast with sparkler
+    "photo-13.jpg": "center 70%",
+    "photo-14.jpg": "center 75%",
+    "photo-15.jpg": "center 75%",
+  },
 };
 
 /* ----- Countdown ----- */
@@ -211,8 +221,11 @@ function revealFadeIns(scope) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "gallery__item fade-in";
-      if ((CONFIG.wideIndexes || []).includes(idx)) {
+      if ((CONFIG.wideNames || []).includes(photo.name)) {
         btn.classList.add("gallery__item--wide");
+      }
+      if (CONFIG.focus && CONFIG.focus[photo.name]) {
+        btn.style.setProperty("--focus", CONFIG.focus[photo.name]);
       }
       btn.setAttribute("aria-label", "View photo " + (idx + 1));
       const img = document.createElement("img");
