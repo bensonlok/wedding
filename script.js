@@ -6,7 +6,7 @@
 const CONFIG = {
   // TODO: Replace with your real wedding date/time (ISO 8601 with timezone).
   // Example for Malaysia (UTC+8): '2026-11-22T17:00:00+08:00'
-  weddingISO: "2026-11-20T17:00:00+08:00",
+  weddingISO: "2026-11-20T15:30:00+08:00",
 
   // Photo folder (relative to this page). Files expected: photo-01.jpg … photo-N.jpg
   photoDir: "assets/photos/",
@@ -17,10 +17,20 @@ const CONFIG = {
   // Prefer a romantic couple shot for the hero.
   // Set to a specific filename (e.g. "photo-03.jpg") once you pick one,
   // or leave null to auto-pick the first available photo.
-  heroPhoto: "photo-05-wedding.jpg", // AI-enhanced wedding attire (Gemini)
+  heroPhoto: "photo-05-wedding.jpg", // groom & bride in wedding attire (AI-enhanced)
 
-  // Index (0-based among found photos) to make wide in the grid
-  wideIndexes: [2, 4, 9], // boat heart, roses kiss, dress fitting
+  // Photos (by filename) shown double-width in the grid (landscape shots)
+  wideNames: ["photo-03.jpg"], // boat heart (photo-19 is portrait, so it stays a normal 4:5 tile)
+
+  // Optional crop focus (CSS object-position) per photo so faces stay in frame
+  focus: {
+    "photo-20.jpg": "center 80%", // fireworks toast
+    "photo-21.jpg": "center 40%", // smiling at pink fireworks
+    "photo-22.jpg": "center 70%", // champagne toast with sparkler
+    "photo-13.jpg": "center 70%",
+    "photo-14.jpg": "center 75%",
+    "photo-15.jpg": "center 75%",
+  },
 };
 
 /* ----- Countdown ----- */
@@ -211,8 +221,11 @@ function revealFadeIns(scope) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "gallery__item fade-in";
-      if ((CONFIG.wideIndexes || []).includes(idx)) {
+      if ((CONFIG.wideNames || []).includes(photo.name)) {
         btn.classList.add("gallery__item--wide");
+      }
+      if (CONFIG.focus && CONFIG.focus[photo.name]) {
+        btn.style.setProperty("--focus", CONFIG.focus[photo.name]);
       }
       btn.setAttribute("aria-label", "View photo " + (idx + 1));
       const img = document.createElement("img");
@@ -241,11 +254,12 @@ function revealFadeIns(scope) {
       heroSrc = match ? match.src : (CONFIG.photoDir + CONFIG.heroPhoto);
     }
     if (heroSrc) setHero(heroSrc);
-    // Prefer showing the wedding-attire hero in the gallery too (front)
-    const galleryPhotos = photos.slice();
-    if (CONFIG.heroPhoto && !galleryPhotos.some((p) => p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto))) {
-      galleryPhotos.unshift({ name: CONFIG.heroPhoto, src: CONFIG.photoDir + CONFIG.heroPhoto });
-    }
+    // Hero photo goes first in the gallery; remaining photos follow in numeric order
+    // (photo-05-wedding.jpg is not auto-discovered, so it is added explicitly if it is the hero)
+    const isHero = (p) => CONFIG.heroPhoto && (p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto));
+    const heroItem = photos.find(isHero) || (CONFIG.heroPhoto ? { name: CONFIG.heroPhoto, src: CONFIG.photoDir + CONFIG.heroPhoto } : null);
+    const galleryPhotos = photos.filter((p) => !isHero(p));
+    if (heroItem) galleryPhotos.unshift(heroItem);
     renderGallery(galleryPhotos);
   });
 })();

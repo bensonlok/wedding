@@ -460,83 +460,72 @@ em { font-style: italic; }
 }
 
 /* =========================================================
-   TIMELINE
+   TIMELINE (icon list, mobile-first)
    ========================================================= */
-.timeline {
+.tl {
   list-style: none;
-  margin-top: 2.5rem;
-  position: relative;
+  max-width: 440px;
+  margin: 2rem auto 0;
   padding: 0;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  text-align: left;
 }
-.timeline::before {
+.tl__item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.tl__item:last-child { margin-bottom: 0; }
+.tl__item:not(:last-child)::after {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1.5px;
-  background: linear-gradient(180deg, var(--gold-pale), var(--gold), var(--gold-pale));
-  transform: translateX(-50%);
+  left: 27px;
+  top: 56px;
+  bottom: -1.5rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--gold-pale));
 }
-.timeline__item {
+.tl__icon {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
   display: grid;
-  grid-template-columns: 1fr 24px 1fr;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 2.25rem;
-  position: relative;
-}
-.timeline__item:last-child { margin-bottom: 0; }
-.timeline__item:nth-child(odd) .timeline__time {
-  text-align: right;
-  grid-column: 1;
-}
-.timeline__item:nth-child(odd) .timeline__content {
-  text-align: left;
-  grid-column: 3;
-}
-.timeline__item:nth-child(even) .timeline__time {
-  text-align: left;
-  grid-column: 3;
-  order: 3;
-}
-.timeline__item:nth-child(even) .timeline__content {
-  text-align: right;
-  grid-column: 1;
-  order: 1;
-}
-.timeline__item:nth-child(even) .timeline__dot { order: 2; }
-
-.timeline__dot {
-  width: 14px;
-  height: 14px;
+  place-items: center;
   border-radius: 50%;
   background: var(--warm-white);
-  border: 2.5px solid var(--burgundy);
-  box-shadow: 0 0 0 4px var(--gold-pale);
-  justify-self: center;
+  color: var(--burgundy);
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 0 0 5px var(--ivory), var(--shadow);
   z-index: 1;
 }
-.timeline__time {
-  font-size: 0.95rem;
+.tl__body { padding-top: 0.15rem; }
+.tl__time {
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--burgundy);
-  letter-spacing: 0.04em;
-  word-break: break-word;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rose);
 }
-.timeline__content h3 {
-  font-size: 1.2rem;
+.tl__title {
+  font-size: 1.3rem;
   font-weight: 500;
-  color: var(--text);
-  margin-bottom: 0.15rem;
+  color: var(--burgundy);
+  line-height: 1.3;
+  margin: 0.1rem 0 0.15rem;
 }
-.timeline__cn {
-  font-family: var(--font-cn);
-  font-size: 0.9rem;
+.tl__text {
+  font-size: 1.02rem;
   color: var(--text-muted);
+  line-height: 1.5;
+}
+.tl__cn {
+  display: block;
+  font-family: var(--font-cn);
+  font-size: 0.88rem;
+  color: var(--rose-soft);
+  margin-top: 0.1rem;
 }
 
 /* =========================================================
@@ -566,6 +555,7 @@ em { font-style: italic; }
   margin-bottom: 1.5rem;
   white-space: pre-line;
 }
+.location__more { margin-top: 1rem; font-size: 0.95rem; }
 
 /* =========================================================
    RSVP
@@ -665,32 +655,6 @@ em { font-style: italic; }
   }
 }
 
-/* Compact timeline on very small screens */
-@media (max-width: 380px) {
-  .timeline__item {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-    text-align: center !important;
-    padding-left: 1.5rem;
-  }
-  .timeline::before { left: 6px; transform: none; }
-  .timeline__item:nth-child(odd) .timeline__time,
-  .timeline__item:nth-child(even) .timeline__time,
-  .timeline__item:nth-child(odd) .timeline__content,
-  .timeline__item:nth-child(even) .timeline__content {
-    grid-column: 1;
-    text-align: left !important;
-    order: unset;
-  }
-  .timeline__dot {
-    position: absolute;
-    left: 0;
-    top: 0.35rem;
-  }
-}
-
-
-
 /* =========================================================
    HERO PHOTO BACKGROUND
    ========================================================= */
@@ -722,6 +686,26 @@ em { font-style: italic; }
 .hero__inner,
 .scroll-hint { position: relative; z-index: 1; }
 
+/* Mobile: the hero photo is a portrait of the couple (faces in the upper-middle).
+   Fit it to the full width at the top, fade it into burgundy, and anchor the
+   text block to the bottom so the names/countdown never sit on their faces. */
+@media (max-width: 559px) {
+  .hero.has-photo {
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+    padding-bottom: 3.5rem;
+  }
+  .hero.has-photo .hero__bg {
+    background-size: 100% auto;
+    background-position: center top;
+    transform: none;
+  }
+  .hero.has-photo .hero__overlay {
+    background:
+      linear-gradient(180deg, rgba(40, 15, 22, 0.05) 0%, rgba(40, 15, 22, 0.05) 28%, rgba(60, 22, 32, 0.7) 48%, rgba(50, 18, 27, 0.94) 62%, rgba(40, 15, 22, 0.98) 100%);
+  }
+}
+
 /* =========================================================
    GALLERY
    ========================================================= */
@@ -731,13 +715,14 @@ em { font-style: italic; }
   grid-template-columns: repeat(2, 1fr);
   gap: 0.65rem;
   margin-top: 1.5rem;
+  grid-auto-flow: dense;
 }
 @media (min-width: 560px) {
   .gallery__grid { grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
 }
 .gallery__item {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
@@ -752,6 +737,7 @@ em { font-style: italic; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: var(--focus, center);
   display: block;
   transition: transform 0.45s var(--ease);
 }
