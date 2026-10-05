@@ -712,14 +712,22 @@ em { font-style: italic; }
    ========================================================= */
 .gallery { background: var(--ivory); }
 .gallery__grid {
+  /* Each tile spans 2 of 4 (mobile) or 2 of 6 (wider) tracks, so a leftover
+     last row can be centred instead of leaving an empty gap. */
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.65rem;
   margin-top: 1.5rem;
   grid-auto-flow: dense;
 }
+.gallery__grid > .gallery__item { grid-column: span 2; }
+.gallery__grid > .gallery__item:last-child:nth-child(odd) { grid-column: 2 / span 2; }
 @media (min-width: 560px) {
-  .gallery__grid { grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+  .gallery__grid { grid-template-columns: repeat(6, 1fr); gap: 0.85rem; }
+  .gallery__grid > .gallery__item:last-child:nth-child(odd) { grid-column: span 2; }
+  .gallery__grid > .gallery__item:last-child:nth-child(3n+1) { grid-column: 3 / span 2; }
+  .gallery__grid > .gallery__item:nth-last-child(2):nth-child(3n+1) { grid-column: 2 / span 2; }
+  .gallery__grid > .gallery__item:last-child:nth-child(3n+2) { grid-column: 4 / span 2; }
 }
 .gallery__item {
   position: relative;
@@ -750,13 +758,12 @@ em { font-style: italic; }
   outline: 2px solid var(--burgundy);
   outline-offset: 2px;
 }
-.gallery__item--wide {
-  grid-column: span 2;
+.gallery__grid > .gallery__item.gallery__item--wide {
+  grid-column: span 4;
   aspect-ratio: 16 / 10;
 }
 @media (min-width: 560px) {
   .gallery__item--wide {
-    grid-column: span 2;
     aspect-ratio: 16 / 11;
   }
 }
