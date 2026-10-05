@@ -8,7 +8,7 @@ const CONFIG = {
   // Example for Malaysia (UTC+8): '2026-11-22T17:00:00+08:00'
   weddingISO: "2026-11-20T15:30:00+08:00",
 
-  // Photo folder (relative to this page). Files expected: photo-01.jpg … photo-N.jpg
+  // Photo folder (relative to this page). Files named photo-NN.jpg (gaps in numbering are fine)
   photoDir: "assets/photos/",
   photoPrefix: "photo-",
   photoExt: ".jpg",
@@ -167,24 +167,16 @@ function revealFadeIns(scope) {
   }
 
   async function discoverPhotos() {
-    const found = [];
-    // Probe sequentially in small batches so we stop early after misses
-    let misses = 0;
+    // Probe every candidate number in parallel, so gaps in numbering (removed photos) are fine.
+    const names = [];
     for (let i = 1; i <= CONFIG.maxPhotos; i++) {
-      const name = CONFIG.photoPrefix + pad2(i) + CONFIG.photoExt;
-      const src = CONFIG.photoDir + name;
-      const ok = await probe(src);
-      if (ok) {
-        found.push({ name, src });
-        misses = 0;
-      } else {
-        misses += 1;
-        // Stop after a few consecutive misses once we've started
-        if (found.length && misses >= 5) break; // tolerate gaps (e.g. removed photo-20…22)
-        // Or if first ones missing, keep scanning a bit then stop
-        if (!found.length && i >= 8) break;
-      }
+      names.push(CONFIG.photoPrefix + pad2(i) + CONFIG.photoExt);
     }
+    const results = await Promise.all(names.map((name) => probe(CONFIG.photoDir + name)));
+    const found = [];
+    names.forEach((name, i) => {
+      if (results[i]) found.push({ name, src: CONFIG.photoDir + name });
+    });
     return found;
   }
 

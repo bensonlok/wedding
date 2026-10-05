@@ -55,8 +55,8 @@ Optional: add an Open Graph image and set `og:image` / `og:url` in `index.html` 
 Place JPEGs in `assets/photos/` named:
 
 ```
-photo-01.jpg
 photo-02.jpg
+photo-03.jpg
 …
 ```
 
