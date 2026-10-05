@@ -126,7 +126,7 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .hero__photo {
   position: absolute; inset: 0;
   background-color: var(--burgundy-deep);
-  background-image: url("assets/photos/photo-05-wedding.jpg");
+  background-image: url("assets/photos/photo-05-natural.jpg");
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center top;
