@@ -7,12 +7,13 @@ const CONFIG = {
   // Ceremony start: Friday 20 November 2026, 3:30 PM Malaysia time (UTC+8)
   weddingISO: "2026-11-20T15:30:00+08:00",
 
-  // RSVP block is hidden until a real link is provided.
-  // To enable: set enabled: true and fill in link (and optionally deadline, e.g. "1 November 2026").
+  // RSVP form posts to Supabase (sensify-tell-us / wedding_rsvp). Benson views replies in the table editor.
   rsvp: {
-    enabled: false,
-    link: "",
-    deadline: "",
+    enabled: true,
+    deadline: "1 November 2026",
+    supabaseUrl: "https://aukotwzggfpmepbkglro.supabase.co",
+    // Public anon key (insert-only via RLS). Safe to ship in the static invite.
+    supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1a290d3pnZ2ZwbWVwYmtnbHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNjQ4MzgsImV4cCI6MjEwNTk0MDgzOH0.iF8vSE1s4gpQxxBQOytzZJ2o02tfHlaKyL_nc2lbzmM",
   },
 };
 
@@ -118,17 +119,96 @@ const CONFIG = {
   update();
 })();
 
-/* ----- RSVP (hidden unless CONFIG.rsvp.enabled and a link is set) ----- */
+/* ----- RSVP form (hidden unless CONFIG.rsvp.enabled) ----- */
 (function initRsvp() {
   const cfg = CONFIG.rsvp || {};
   const section = document.getElementById("rsvp");
-  if (!section || !cfg.enabled || !cfg.link) return;
-  const btn = section.querySelector("[data-rsvp-link]");
-  if (btn) btn.setAttribute("href", cfg.link);
+  if (!section || !cfg.enabled) return;
+
   const deadlineEl = section.querySelector("[data-rsvp-deadline]");
   if (deadlineEl && cfg.deadline) {
     deadlineEl.querySelector("strong").textContent = cfg.deadline;
     deadlineEl.hidden = false;
   }
   section.hidden = false;
+
+  const form = document.getElementById("rsvpForm");
+  const status = document.getElementById("rsvpStatus");
+  const submitBtn = document.getElementById("rsvpSubmit");
+  if (!form || !cfg.supabaseUrl || !cfg.supabaseAnonKey) return;
+
+  function setStatus(msg, kind) {
+    if (!status) return;
+    status.hidden = !msg;
+    status.textContent = msg || "";
+    status.classList.remove("is-ok", "is-err");
+    if (kind) status.classList.add(kind);
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setStatus("");
+
+    const fd = new FormData(form);
+    const name = String(fd.get("name") || "").trim();
+    const attendance = String(fd.get("attendance") || "").trim();
+    const guestRaw = String(fd.get("guest_count") || "").trim();
+    const phone = String(fd.get("phone") || "").trim();
+    const message = String(fd.get("message") || "").trim();
+    const guest_count = Number.parseInt(guestRaw, 10);
+
+    if (!name) {
+      setStatus("Please enter your name.", "is-err");
+      return;
+    }
+    if (!["yes", "no", "maybe"].includes(attendance)) {
+      setStatus("Please choose whether you can attend.", "is-err");
+      return;
+    }
+    if (!Number.isFinite(guest_count) || guest_count < 0 || guest_count > 20) {
+      setStatus("Guest count must be between 0 and 20.", "is-err");
+      return;
+    }
+
+    const payload = {
+      name,
+      attendance,
+      guest_count,
+      phone: phone || null,
+      message: message || null,
+      user_agent: navigator.userAgent.slice(0, 240),
+      source_url: location.href.slice(0, 500),
+    };
+
+    submitBtn.disabled = true;
+    const prevLabel = submitBtn.textContent;
+    submitBtn.textContent = "Sending…";
+    setStatus("Sending your RSVP…");
+
+    try {
+      const res = await fetch(`${cfg.supabaseUrl}/rest/v1/wedding_rsvp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: cfg.supabaseAnonKey,
+          Authorization: `Bearer ${cfg.supabaseAnonKey}`,
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        throw new Error(detail || `HTTP ${res.status}`);
+      }
+      form.reset();
+      form.querySelector('[name="guest_count"]').value = "1";
+      setStatus("Thank you — your RSVP was received.", "is-ok");
+    } catch (err) {
+      console.error(err);
+      setStatus("Sorry, something went wrong. Please try again in a moment.", "is-err");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = prevLabel;
+    }
+  });
 })();
