@@ -686,6 +686,26 @@ em { font-style: italic; }
 .hero__inner,
 .scroll-hint { position: relative; z-index: 1; }
 
+/* Mobile: the hero photo is a portrait of the couple (faces in the upper-middle).
+   Fit it to the full width at the top, fade it into burgundy, and anchor the
+   text block to the bottom so the names/countdown never sit on their faces. */
+@media (max-width: 559px) {
+  .hero.has-photo {
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+    padding-bottom: 3.5rem;
+  }
+  .hero.has-photo .hero__bg {
+    background-size: 100% auto;
+    background-position: center top;
+    transform: none;
+  }
+  .hero.has-photo .hero__overlay {
+    background:
+      linear-gradient(180deg, rgba(40, 15, 22, 0.05) 0%, rgba(40, 15, 22, 0.05) 28%, rgba(60, 22, 32, 0.7) 48%, rgba(50, 18, 27, 0.94) 62%, rgba(40, 15, 22, 0.98) 100%);
+  }
+}
+
 /* =========================================================
    GALLERY
    ========================================================= */

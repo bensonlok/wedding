@@ -17,7 +17,7 @@ const CONFIG = {
   // Prefer a romantic couple shot for the hero.
   // Set to a specific filename (e.g. "photo-03.jpg") once you pick one,
   // or leave null to auto-pick the first available photo.
-  heroPhoto: "photo-23.jpg", // roses couple shot (photo-05-wedding.jpg kept as an extra gallery photo)
+  heroPhoto: "photo-05-wedding.jpg", // groom & bride in wedding attire (AI-enhanced)
 
   // Photos (by filename) shown double-width in the grid (landscape shots)
   wideNames: ["photo-03.jpg"], // boat heart (photo-19 is portrait, so it stays a normal 4:5 tile)
@@ -254,14 +254,11 @@ function revealFadeIns(scope) {
       heroSrc = match ? match.src : (CONFIG.photoDir + CONFIG.heroPhoto);
     }
     if (heroSrc) setHero(heroSrc);
-    // Hero photo goes first in the gallery; keep the wedding-attire shot as an extra photo right after it
+    // Hero photo goes first in the gallery; remaining photos follow in numeric order
+    // (photo-05-wedding.jpg is not auto-discovered, so it is added explicitly if it is the hero)
     const isHero = (p) => CONFIG.heroPhoto && (p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto));
     const heroItem = photos.find(isHero) || (CONFIG.heroPhoto ? { name: CONFIG.heroPhoto, src: CONFIG.photoDir + CONFIG.heroPhoto } : null);
     const galleryPhotos = photos.filter((p) => !isHero(p));
-    const extraName = "photo-05-wedding.jpg";
-    if (!galleryPhotos.some((p) => p.name === extraName)) {
-      galleryPhotos.unshift({ name: extraName, src: CONFIG.photoDir + extraName });
-    }
     if (heroItem) galleryPhotos.unshift(heroItem);
     renderGallery(galleryPhotos);
   });
