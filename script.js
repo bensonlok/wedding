@@ -17,10 +17,10 @@ const CONFIG = {
   // Prefer a romantic couple shot for the hero.
   // Set to a specific filename (e.g. "photo-03.jpg") once you pick one,
   // or leave null to auto-pick the first available photo.
-  heroPhoto: "photo-05-wedding.jpg", // AI-enhanced wedding attire (Gemini)
+  heroPhoto: "photo-23.jpg", // roses couple shot (photo-05-wedding.jpg kept as an extra gallery photo)
 
   // Photos (by filename) shown double-width in the grid (landscape shots)
-  wideNames: ["photo-03.jpg", "photo-19.jpg"], // boat heart, Japan lawn
+  wideNames: ["photo-03.jpg"], // boat heart (photo-19 is portrait, so it stays a normal 4:5 tile)
 
   // Optional crop focus (CSS object-position) per photo so faces stay in frame
   focus: {
@@ -254,11 +254,15 @@ function revealFadeIns(scope) {
       heroSrc = match ? match.src : (CONFIG.photoDir + CONFIG.heroPhoto);
     }
     if (heroSrc) setHero(heroSrc);
-    // Prefer showing the wedding-attire hero in the gallery too (front)
-    const galleryPhotos = photos.slice();
-    if (CONFIG.heroPhoto && !galleryPhotos.some((p) => p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto))) {
-      galleryPhotos.unshift({ name: CONFIG.heroPhoto, src: CONFIG.photoDir + CONFIG.heroPhoto });
+    // Hero photo goes first in the gallery; keep the wedding-attire shot as an extra photo right after it
+    const isHero = (p) => CONFIG.heroPhoto && (p.name === CONFIG.heroPhoto || p.src.endsWith(CONFIG.heroPhoto));
+    const heroItem = photos.find(isHero) || (CONFIG.heroPhoto ? { name: CONFIG.heroPhoto, src: CONFIG.photoDir + CONFIG.heroPhoto } : null);
+    const galleryPhotos = photos.filter((p) => !isHero(p));
+    const extraName = "photo-05-wedding.jpg";
+    if (!galleryPhotos.some((p) => p.name === extraName)) {
+      galleryPhotos.unshift({ name: extraName, src: CONFIG.photoDir + extraName });
     }
+    if (heroItem) galleryPhotos.unshift(heroItem);
     renderGallery(galleryPhotos);
   });
 })();
