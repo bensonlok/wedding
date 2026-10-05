@@ -27,15 +27,11 @@ const CONFIG = {
     deadline: "",
   },
 
-  // Photos (by filename) shown double-width in the grid (landscape shots)
-  wideNames: ["photo-03.jpg"], // boat heart (photo-19 is portrait, so it stays a normal 4:5 tile)
+  // Photos (by filename) shown double-width in the grid (landscape shots only; none right now)
+  wideNames: [],
 
   // Optional crop focus (CSS object-position) per photo so faces stay in frame
-  focus: {
-    "photo-13.jpg": "center 70%",
-    "photo-14.jpg": "center 75%",
-    "photo-15.jpg": "center 75%",
-  },
+  focus: {},
 };
 
 /* ----- Countdown ----- */
