@@ -253,6 +253,36 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .map { margin: 3rem calc(var(--gutter) * -1) 0; height: 260px; background: var(--blush); }
 .map iframe { width: 100%; height: 100%; border: 0; filter: saturate(0.85); }
 
+/* ---------- dress code ---------- */
+.dresscode { background: var(--ivory); }
+.dc__tagline { margin: 0 auto; max-width: 40rem; text-wrap: balance; font-size: 1.1rem; font-style: italic; line-height: 1.5; color: var(--text); }
+.dc__nw { white-space: nowrap; }
+.dc__tagline [lang], .dc__tones [lang] { display: inline-block; margin-top: 0.3rem; word-break: keep-all; font-style: normal; font-size: 0.92rem; letter-spacing: 0.06em; color: var(--muted); }
+.dc__palette { list-style: none; margin: 2.2rem auto 0; padding: 0; max-width: 460px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 0.4rem; }
+.dc__colour { display: flex; flex-direction: column; align-items: center; }
+.dc__swatch { width: 58px; height: 58px; border-radius: 50%; background: var(--swatch); border: 3px solid #fff; box-shadow: 0 0 0 1px var(--gold-soft), 0 6px 16px rgba(79,26,40,0.14); margin-bottom: 0.7rem; }
+.dc__name { font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.4; color: var(--burgundy); text-wrap: balance; }
+.dc__cn { margin-top: 0.2rem; font-size: 0.88rem; letter-spacing: 0.08em; color: var(--muted); }
+.dc__tones { margin: 1.6rem auto 0; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.6; color: var(--rose); }
+.dc__tones [lang] { font-family: var(--cn); text-transform: none; }
+.dc__guide { margin: 2.4rem auto 0; max-width: 520px; display: grid; gap: 1rem; }
+.dc__card { padding: 1.4rem 1.2rem 1.3rem; border: 1px solid var(--gold-soft); border-radius: 14px; background: #fff; box-shadow: 0 8px 22px rgba(123,45,62,0.07); }
+.dc__who { margin: 0 0 0.5rem; font-family: var(--sans); font-weight: 400; font-size: 0.74rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--rose); }
+.dc__who [lang] { margin-left: 0.4em; letter-spacing: 0.12em; color: var(--muted); }
+.dc__card p { margin: 0; font-size: 1.2rem; line-height: 1.35; color: var(--burgundy); text-wrap: balance; }
+.dc__card .dc__card-cn { margin-top: 0.3rem; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--muted); word-break: keep-all; overflow-wrap: anywhere; }
+.dc__note { margin: 2.4rem auto 0; max-width: 32ch; text-wrap: pretty; font-size: 1.08rem; font-style: italic; line-height: 1.55; color: var(--muted); }
+.dc__note [lang] { display: inline-block; margin-top: 0.6rem; word-break: keep-all; overflow-wrap: anywhere; font-style: normal; font-size: 0.92rem; letter-spacing: 0.05em; line-height: 1.7; }
+.dc__fun { margin: 1.4rem 0 0; font-family: var(--script); font-size: 1.9rem; line-height: 1.3; color: var(--burgundy); }
+.dc__fun [lang] { display: block; font-size: 0.95rem; letter-spacing: 0.12em; color: var(--rose); }
+.dc__figure { margin: 2.6rem auto 0; max-width: 560px; }
+.dc__figure a { display: block; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 34px rgba(79,26,40,0.16); }
+.dc__figure img { width: 100%; transition: transform 0.6s var(--ease); }
+.dc__figure a:hover img { transform: scale(1.02); }
+.dc__figure figcaption { margin-top: 0.9rem; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.dc__figure figcaption [lang] { letter-spacing: 0.1em; text-transform: none; }
+.dc__figure figcaption small { display: block; margin-top: 0.25rem; font-size: 0.62rem; letter-spacing: 0.14em; opacity: 0.75; }
+
 /* ---------- rsvp + calendar ---------- */
 .rsvp { background: var(--burgundy-deep); color: #fff; }
 .rsvp .title, .rsvp .eyebrow { color: #fff; }
@@ -375,6 +405,7 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
   .carousel { padding-left: calc((100% - 1100px) / 2 + var(--gutter)); padding-right: var(--gutter); justify-content: flex-start; }
   .carousel__slide { flex-basis: 300px; }
   .map { height: 340px; }
+  .dc__guide { grid-template-columns: 1fr 1fr; max-width: 640px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
