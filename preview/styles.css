@@ -398,6 +398,40 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .footer__date [lang] { letter-spacing: 0.12em; text-transform: none; }
 .footer__venue { margin: 0.3rem 0 0; opacity: 0.85; }
 .footer__love { margin: 1.8rem 0 0; font-size: 0.95rem; opacity: 0.6; }
+.footer__credit { margin: 1.4rem auto 0; max-width: 16rem; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.06em; line-height: 1.6; opacity: 0.45; }
+
+/* ---------- background music button (bottom-right, clear of the menu and RSVP) ---------- */
+.music-btn {
+  position: fixed; z-index: 35;
+  right: calc(16px + env(safe-area-inset-right));
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  width: 46px; height: 46px; padding: 0; margin: 0;
+  display: grid; place-items: center;
+  border: 1px solid var(--gold-soft); border-radius: 50%;
+  background: rgba(79, 26, 40, 0.9);
+  color: var(--gold-soft);
+  box-shadow: 0 6px 18px rgba(40, 12, 20, 0.3), inset 0 0 0 3px rgba(79, 26, 40, 0.9), inset 0 0 0 4px rgba(216, 194, 138, 0.35);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 0.3s var(--ease), background-color 0.3s, opacity 0.3s;
+}
+.music-btn:hover { transform: translateY(-2px); background-color: var(--burgundy-deep); }
+.music-btn:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 3px; }
+.music-btn__icon { display: block; width: 20px; height: 20px; transform-origin: 50% 70%; }
+.music-btn__slash {
+  position: absolute; top: 50%; left: 50%; width: 26px; height: 1.5px; margin: -0.75px 0 0 -13px;
+  border-radius: 1px; background: currentColor; box-shadow: 0 0 0 1.5px rgba(79, 26, 40, 0.9);
+  transform: rotate(-45deg); transition: opacity 0.3s, transform 0.3s var(--ease);
+}
+.music-btn::after { content: ""; position: absolute; inset: -1px; border: 1px solid var(--gold-soft); border-radius: 50%; opacity: 0; pointer-events: none; }
+.music-btn.is-playing .music-btn__slash { opacity: 0; transform: rotate(-45deg) scaleX(0); }
+.music-btn.is-playing .music-btn__icon { animation: music-sway 2.4s ease-in-out infinite; }
+.music-btn.is-playing::after { animation: music-ring 2.8s ease-out infinite; }
+@keyframes music-sway { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg) translateY(-1.5px); } }
+@keyframes music-ring { 0% { transform: scale(1); opacity: 0.55; } 100% { transform: scale(1.5); opacity: 0; } }
+body.menu-open .music-btn { opacity: 0; pointer-events: none; }
 
 /* ---------- wider screens ---------- */
 @media (min-width: 900px) {
@@ -428,4 +462,5 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero__photo, .hero__scroll span, .more__body { animation: none; }
+  .music-btn.is-playing .music-btn__icon, .music-btn.is-playing::after { animation: none; }
 }

@@ -415,8 +415,21 @@
       <p class="footer__date">Friday, 20 November 2026 · from&nbsp;3:00&nbsp;PM<br /><span lang="zh-Hans">2026年11月20日（星期五）· 下午3时起</span></p>
       <p class="footer__venue">W Factory Event Space, Shah Alam</p>
       <p class="footer__love">With love · We look forward to seeing you<br /><span lang="zh-Hans">以爱相邀 · 恭候光临</span></p>
+      <p class="footer__credit">Music: Chopin, Nocturne Op. 9 No. 2 · Frank Lévy / Musopen (public domain)</p>
     </div>
   </footer>
+
+  <!-- Background music: starts on load if the browser allows it, otherwise on the guest's first tap -->
+  <audio id="bgMusic" src="assets/music/chopin-nocturne-op9-no2.mp3" preload="none" loop playsinline></audio>
+  <button class="music-btn" id="musicBtn" type="button" aria-label="Play music · 播放音乐" title="Play music · 播放音乐">
+    <svg class="music-btn__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M9 17.2V7.6l10-2.1v9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M9 7.6l10-2.1v2.9L9 10.5z" fill="currentColor" />
+      <ellipse cx="6.6" cy="17.4" rx="2.6" ry="2" transform="rotate(-18 6.6 17.4)" fill="currentColor" />
+      <ellipse cx="16.6" cy="15.3" rx="2.6" ry="2" transform="rotate(-18 16.6 15.3)" fill="currentColor" />
+    </svg>
+    <span class="music-btn__slash" aria-hidden="true"></span>
+  </button>
 
   <div class="preview-ribbon" aria-hidden="true" style="position:fixed;left:50%;bottom:calc(10px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;padding:.35rem .9rem;border-radius:999px;background:rgba(79,26,40,.9);color:#f3e3b5;font-family:Jost,system-ui,sans-serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none">Preview · <span style="letter-spacing:.1em">预览版</span></div>
   <script src="script.js"></script>
