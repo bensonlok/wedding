@@ -15,13 +15,13 @@ Mobile-first static wedding invitation, bilingual on one page (English + 简体�
 1. Full-bleed hero (date, names, countdown to the 3:00 PM start, Malaysia time)
 2. Intro ("You're invited") with RSVP / The Day / Save the Date buttons
 3. Our story + "read more"
-4. Three photo chapters (everyday joy · walking together · a new beginning)
-5. Family & friends, photo carousel
-6. Order of the day (Tea Ceremony, ROM, Dinner, After Party), with "Guests are welcome from 3:00 PM onwards"
-7. A little something for you: Coffee Cart, Ice Cream Cart, Handcraft Corner (3:00 PM onwards); Drinks & Cocktails (from 5:00 PM)
-8. Venue with map, Google Maps button and venue website link
-9. RSVP form (live)
-10. Add to Calendar (Google Calendar link + `assets/benson-mecki-wedding.ics`)
+4. Our love story in five chapters: The Beginning 初见 · Little Adventures 一起走过 (3-photo swipe) ·
+   The Proposal 求婚 · Our Family 我们的家 · The Big Day 大日子 (leads into the order of the day)
+5. Order of the day (Tea Ceremony, ROM, Dinner, After Party), with "Guests are welcome from 3:00 PM onwards"
+6. A little something for you: Coffee Cart, Ice Cream Cart, Handcraft Corner (3:00 PM onwards); Drinks & Cocktails (from 5:00 PM)
+7. Venue with map, Google Maps button and venue website link
+8. RSVP form (live)
+9. Add to Calendar (Google Calendar link + `assets/benson-mecki-wedding.ics`)
 
 ## Files
 
@@ -29,8 +29,8 @@ Mobile-first static wedding invitation, bilingual on one page (English + 简体�
 |------|---------|
 | `index.html` | Page content (English + Chinese copy) |
 | `styles.css` | Theme and layout |
-| `script.js` | Countdown, scroll reveal, menu, carousel, RSVP form (`CONFIG`) |
-| `assets/photos/` | Photos (resized, JPEG) |
+| `script.js` | Countdown, scroll reveal, menu, story carousel dots, RSVP form (`CONFIG`) |
+| `assets/photos/` | Photos (resized web JPEG, EXIF stripped): hero `photo-05-wedding.jpg`, story `story-0*.jpg` |
 | `assets/benson-mecki-wedding.ics` | Calendar file (Fri 20 Nov 2026, 3:00 PM to 11:30 PM MYT) |
 | `responses/` | Private, passcode-gated page for viewing RSVP replies |
 
