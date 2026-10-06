@@ -11,6 +11,7 @@ const CONFIG = {
   rsvp: {
     enabled: true,
     deadline: "1 November 2026",
+    deadlineZh: "2026年11月1日",
     supabaseUrl: "https://aukotwzggfpmepbkglro.supabase.co",
     // Public anon key (insert-only via RLS). Safe to ship in the static invite.
     supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1a290d3pnZ2ZwbWVwYmtnbHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNjQ4MzgsImV4cCI6MjEwNTk0MDgzOH0.iF8vSE1s4gpQxxBQOytzZJ2o02tfHlaKyL_nc2lbzmM",
@@ -120,15 +121,43 @@ const CONFIG = {
 })();
 
 /* ----- RSVP form (hidden unless CONFIG.rsvp.enabled) ----- */
+// Bilingual status strings: [English, 简体中文]
+const RSVP_TEXT = {
+  sendingBtn: ["Sending…", "提交中…"],
+  sending: ["Sending your reply…", "正在提交您的回复，请稍候…"],
+  ok: ["Thank you! We’ve received your reply.", "谢谢您！我们已收到您的回复。"],
+  noName: ["Please enter your name.", "请填写您的姓名。"],
+  noAttendance: ["Please let us know if you can attend.", "请选择能否出席。"],
+  guestCount: ["Please enter a number of guests from 0 to 20.", "出席人数须介于 0 至 20 位之间。"],
+  failed: ["Sorry, your reply didn’t go through. Please try again in a moment.", "抱歉，提交未成功，请稍后再试。"],
+};
+
+/** Fill `el` with an English line and a Chinese line (no innerHTML). */
+function setBilingual(el, pair, sep) {
+  el.textContent = "";
+  if (!pair) return;
+  el.append(pair[0]);
+  el.append(sep === "br" ? document.createElement("br") : " ");
+  const zh = document.createElement("span");
+  zh.lang = "zh-Hans";
+  zh.textContent = pair[1];
+  el.append(zh);
+}
+
 (function initRsvp() {
   const cfg = CONFIG.rsvp || {};
   const section = document.getElementById("rsvp");
   if (!section || !cfg.enabled) return;
 
-  const deadlineEl = section.querySelector("[data-rsvp-deadline]");
-  if (deadlineEl && cfg.deadline) {
-    deadlineEl.querySelector("strong").textContent = cfg.deadline;
-    deadlineEl.hidden = false;
+  if (cfg.deadline) {
+    section.querySelectorAll("[data-rsvp-deadline]").forEach((el) => {
+      const strong = el.querySelector("strong");
+      const isZh = strong && strong.dataset.deadline === "zh";
+      const text = isZh ? cfg.deadlineZh : cfg.deadline;
+      if (!strong || !text) return;
+      strong.textContent = text;
+      el.hidden = false;
+    });
   }
   section.hidden = false;
 
@@ -140,14 +169,14 @@ const CONFIG = {
   function setStatus(msg, kind) {
     if (!status) return;
     status.hidden = !msg;
-    status.textContent = msg || "";
+    setBilingual(status, msg, "br");
     status.classList.remove("is-ok", "is-err");
     if (kind) status.classList.add(kind);
   }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    setStatus("");
+    setStatus(null);
 
     const fd = new FormData(form);
     const name = String(fd.get("name") || "").trim();
@@ -158,15 +187,15 @@ const CONFIG = {
     const guest_count = Number.parseInt(guestRaw, 10);
 
     if (!name) {
-      setStatus("Please enter your name.", "is-err");
+      setStatus(RSVP_TEXT.noName, "is-err");
       return;
     }
     if (!["yes", "no", "maybe"].includes(attendance)) {
-      setStatus("Please choose whether you can attend.", "is-err");
+      setStatus(RSVP_TEXT.noAttendance, "is-err");
       return;
     }
     if (!Number.isFinite(guest_count) || guest_count < 0 || guest_count > 20) {
-      setStatus("Guest count must be between 0 and 20.", "is-err");
+      setStatus(RSVP_TEXT.guestCount, "is-err");
       return;
     }
 
@@ -181,9 +210,9 @@ const CONFIG = {
     };
 
     submitBtn.disabled = true;
-    const prevLabel = submitBtn.textContent;
-    submitBtn.textContent = "Sending…";
-    setStatus("Sending your RSVP…");
+    const prevLabel = Array.from(submitBtn.childNodes).map((n) => n.cloneNode(true));
+    setBilingual(submitBtn, RSVP_TEXT.sendingBtn);
+    setStatus(RSVP_TEXT.sending);
 
     try {
       const res = await fetch(`${cfg.supabaseUrl}/rest/v1/wedding_rsvp`, {
@@ -202,13 +231,13 @@ const CONFIG = {
       }
       form.reset();
       form.querySelector('[name="guest_count"]').value = "1";
-      setStatus("Thank you — your RSVP was received.", "is-ok");
+      setStatus(RSVP_TEXT.ok, "is-ok");
     } catch (err) {
       console.error(err);
-      setStatus("Sorry, something went wrong. Please try again in a moment.", "is-err");
+      setStatus(RSVP_TEXT.failed, "is-err");
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = prevLabel;
+      submitBtn.replaceChildren(...prevLabel);
     }
   });
 })();
