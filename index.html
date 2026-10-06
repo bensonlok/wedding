@@ -31,7 +31,6 @@
   </header>
   <nav class="menu" id="menu" hidden aria-label="Sections">
     <a href="#story">Our Story <em>我们的故事</em></a>
-    <a href="#moments">Our Photos <em>我们的照片</em></a>
     <a href="#timeline">The Day <em>当日流程</em></a>
     <a href="#location">Venue <em>婚礼地点</em></a>
     <a href="#dresscode">Dress Code <em>着装建议</em></a>
@@ -97,65 +96,76 @@
       </div>
     </section>
 
-    <!-- 4. THREE CHAPTERS -->
-    <section class="chapters" id="chapters" aria-label="Photo chapters">
+    <!-- 4. OUR LOVE STORY — five chapters -->
+    <section class="chapters" id="chapters" aria-label="Our love story 我们的爱情故事">
+
       <article class="chapter">
-        <figure class="chapter__img reveal"><img src="assets/photos/photo-24.jpg" alt="Benson and Mecki at a café table" loading="lazy" width="1200" height="1600" /></figure>
-        <div class="chapter__text reveal">
+        <header class="chapter__head reveal">
           <p class="chapter__no">01</p>
-          <h3>Everyday joy <span lang="zh-Hans">日常欢喜</span></h3>
-          <p>The simplest moments together are often the sweetest.</p>
-          <p lang="zh-Hans">最平凡的相伴，往往最是甜蜜。</p>
+          <h3>The Beginning <span lang="zh-Hans">初见</span></h3>
+        </header>
+        <figure class="chapter__img reveal"><img src="assets/photos/story-01-beginning.jpg" alt="Benson and Mecki smiling side by side at a table" loading="lazy" decoding="async" width="520" height="455" /></figure>
+        <div class="chapter__text reveal">
+          <p>Every love story has a first page. This one is ours.</p>
+          <p lang="zh-Hans"><span class="ph">最美的故事，</span><wbr /><span class="ph">总有一个温柔的开始。</span></p>
         </div>
       </article>
 
-      <article class="chapter chapter--flip">
-        <figure class="chapter__img reveal"><img src="assets/photos/photo-25.jpg" alt="Benson and Mecki walking hand in hand" loading="lazy" width="1200" height="1600" /></figure>
-        <div class="chapter__text reveal">
+      <article class="chapter chapter--wide">
+        <header class="chapter__head reveal">
           <p class="chapter__no">02</p>
-          <h3>Walking together <span lang="zh-Hans">并肩同行</span></h3>
-          <p>Wherever the road leads, we&rsquo;ll walk it hand in hand.</p>
-          <p lang="zh-Hans">无论前路通往何方，我们都会牵着彼此的手，一起走下去。</p>
+          <h3>Little Adventures <span lang="zh-Hans">一起走过</span></h3>
+        </header>
+        <div class="chapter__gallery reveal">
+          <div class="carousel" data-carousel tabindex="0" aria-label="Little Adventures: three photos. Swipe to see more. 左右滑动查看更多">
+            <figure class="carousel__slide"><img src="assets/photos/story-02-adventures-1.jpg" alt="Benson and Mecki in an evening selfie, cheek to cheek" loading="lazy" decoding="async" width="810" height="1012" /></figure>
+            <figure class="carousel__slide"><img src="assets/photos/story-02-adventures-2.jpg" alt="Benson and Mecki in a sunny selfie under palm trees" loading="lazy" decoding="async" width="809" height="1011" /></figure>
+            <figure class="carousel__slide"><img src="assets/photos/story-02-adventures-3.jpg" alt="Benson and Mecki holding hands in a garden in the evening" loading="lazy" decoding="async" width="1200" height="1500" /></figure>
+          </div>
+          <div class="carousel__dots" aria-hidden="true"></div>
+        </div>
+        <div class="chapter__text reveal">
+          <p>Sunny days, starry nights&nbsp;&mdash; every little adventure is better side by side.</p>
+          <p lang="zh-Hans"><span class="ph">阳光下，</span><wbr /><span class="ph">夜色里，</span><wbr /><span class="ph">并肩走过的每一程，</span><wbr /><span class="ph">都是风景。</span></p>
         </div>
       </article>
 
       <article class="chapter">
-        <figure class="chapter__img reveal"><img src="assets/photos/photo-27.jpg" alt="Silhouette of Benson and Mecki" loading="lazy" width="1200" height="1600" /></figure>
-        <div class="chapter__text reveal">
+        <header class="chapter__head reveal">
           <p class="chapter__no">03</p>
-          <h3>A new beginning <span lang="zh-Hans">崭新篇章</span></h3>
-          <p>From a joyful &ldquo;yes&rdquo; to the day we say &ldquo;I do&rdquo;.</p>
-          <p lang="zh-Hans">从求婚时那一声欣喜的“好”，到婚礼上那一句郑重的“我愿意”。</p>
+          <h3>The Proposal <span lang="zh-Hans">求婚</span></h3>
+        </header>
+        <figure class="chapter__img chapter__img--tall reveal"><img src="assets/photos/story-03-proposal.jpg" alt="Benson on one knee with a ring as Mecki holds a bouquet of red roses beneath fireworks" loading="lazy" decoding="async" width="728" height="1280" /></figure>
+        <div class="chapter__text reveal">
+          <p>Fireworks overhead, roses in her arms&nbsp;&mdash; one question, and a joyful &ldquo;yes&rdquo;.</p>
+          <p lang="zh-Hans"><span class="ph">漫天烟花下，</span><wbr /><span class="ph">玫瑰为证，</span><wbr /><span class="ph">许下一生之约。</span></p>
         </div>
       </article>
-    </section>
 
-    <!-- 5. FAMILY & FRIENDS -->
-    <section class="section friends" id="friends">
-      <figure class="friends__img reveal"><img src="assets/photos/photo-26.jpg" alt="Benson and Mecki with family and friends" loading="lazy" width="1125" height="1500" /></figure>
-      <div class="section__inner reveal">
-        <p class="eyebrow">Family &amp; Friends · <span lang="zh-Hans">亲友相伴</span></p>
-        <p class="lead">We are so grateful for the family and friends who fill our lives with love. We can&rsquo;t wait to celebrate with you.</p>
-        <p class="lead lead--cn" lang="zh-Hans">一路有挚爱亲友相伴，何其有幸。期待与您共庆这份喜悦。</p>
-      </div>
-    </section>
+      <article class="chapter">
+        <header class="chapter__head reveal">
+          <p class="chapter__no">04</p>
+          <h3>Our Family <span lang="zh-Hans">我们的家</span></h3>
+        </header>
+        <figure class="chapter__img reveal"><img src="assets/photos/story-04-family.jpg" alt="Benson and Mecki with their family on an evening out" loading="lazy" decoding="async" width="960" height="1050" /></figure>
+        <div class="chapter__text reveal">
+          <p>Home is wherever our family and dearest ones gather.</p>
+          <p lang="zh-Hans"><span class="ph">有家人与挚亲相伴的地方，</span><wbr /><span class="ph">就是我们的家。</span></p>
+        </div>
+      </article>
 
-    <!-- 6. OUR PHOTOS — one per scene -->
-    <section class="section moments" id="moments">
-      <div class="section__inner reveal">
-        <p class="eyebrow">Moments · <span lang="zh-Hans">点滴时光</span></p>
-        <h2 class="title">Our Photos</h2>
-        <p class="title-cn" lang="zh-Hans">我们的照片</p>
-      </div>
-      <div class="carousel reveal" id="carousel" tabindex="0" aria-label="Photo carousel. Swipe to see more.">
-        <figure class="carousel__slide"><img src="assets/photos/photo-05-wedding.jpg" alt="Benson and Mecki with roses, in wedding attire" loading="lazy" /></figure>
-        <figure class="carousel__slide"><img src="assets/photos/photo-24.jpg" alt="A café moment" loading="lazy" /></figure>
-        <figure class="carousel__slide"><img src="assets/photos/photo-25.jpg" alt="A walk through the city streets" loading="lazy" /></figure>
-        <figure class="carousel__slide"><img src="assets/photos/photo-27.jpg" alt="A silhouette together" loading="lazy" /></figure>
-        <figure class="carousel__slide"><img src="assets/photos/photo-16.jpg" alt="A forest path" loading="lazy" /></figure>
-        <figure class="carousel__slide"><img src="assets/photos/photo-26.jpg" alt="With family and friends" loading="lazy" /></figure>
-      </div>
-      <div class="carousel__dots" id="carouselDots" aria-hidden="true"></div>
+      <article class="chapter chapter--finale">
+        <header class="chapter__head reveal">
+          <p class="chapter__no">05</p>
+          <h3>The Big Day <span lang="zh-Hans">大日子</span></h3>
+        </header>
+        <div class="chapter__text reveal">
+          <p class="chapter__date">20 &middot; 11 &middot; 2026</p>
+          <p>The next chapter begins on Friday, 20&nbsp;November 2026&nbsp;&mdash; and we would love you to be there.</p>
+          <p class="chapter__verse" lang="zh-Hans"><span class="ph">2026年11月20日（星期五），</span><span class="ph">我们的故事将翻开新的一章，</span><span class="ph">诚盼您与我们一同见证。</span></p>
+          <a class="btn btn--gold" href="#timeline">The Day <span lang="zh-Hans">当日流程</span></a>
+        </div>
+      </article>
     </section>
 
     <!-- 7. TIMELINE -->
@@ -242,7 +252,7 @@
           </ul>
         </div>
 
-        <p class="treats__note reveal">Take your time, explore, and enjoy the little surprises we&rsquo;ve prepared for you.<br /><span lang="zh-Hans">慢慢享受，我们为您准备了一些小小惊喜。</span></p>
+        <p class="treats__note reveal">Take your time, explore, and enjoy the little surprises we&rsquo;ve prepared for you.<br /><span lang="zh-Hans"><span class="ph">慢慢享受，</span><wbr /><span class="ph">我们为您准备了一些小小惊喜。</span></span></p>
       </div>
     </section>
 

@@ -97,11 +97,10 @@ const CONFIG = {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
 })();
 
-/* ----- Photo carousel dots ----- */
-(function initCarousel() {
-  const car = document.getElementById("carousel");
-  const dotsWrap = document.getElementById("carouselDots");
-  if (!car || !dotsWrap) return;
+/* ----- Photo carousel dots (any [data-carousel] followed by .carousel__dots) ----- */
+document.querySelectorAll("[data-carousel]").forEach((car) => {
+  const dotsWrap = car.nextElementSibling;
+  if (!dotsWrap || !dotsWrap.classList.contains("carousel__dots")) return;
   const slides = Array.from(car.children);
   slides.forEach(() => dotsWrap.appendChild(document.createElement("i")));
   const dots = Array.from(dotsWrap.children);
@@ -118,7 +117,7 @@ const CONFIG = {
   car.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
   window.addEventListener("resize", update);
   update();
-})();
+});
 
 /* ----- RSVP form (hidden unless CONFIG.rsvp.enabled) ----- */
 // Bilingual status strings: [English, 简体中文]
