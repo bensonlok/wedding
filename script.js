@@ -125,12 +125,12 @@ const CONFIG = {
 const RSVP_TEXT = {
   sendingBtn: ["Sending…", "提交中…"],
   sending: ["Sending your reply…", "正在提交您的回复，请稍候…"],
-  ok: ["Thank you! We’ve received your reply.", "谢谢您！我们已收到您的回复。"],
+  ok: ["Thank you! We’ve received your reply.", "衷心感谢！我们已收到您的回复。"],
   noName: ["Please enter your name.", "请填写您的姓名。"],
-  noAttendance: ["Please let us know if you can attend.", "请选择能否出席。"],
-  guestCount: ["Please enter a number of guests from 0 to 20.", "出席人数须介于 0 至 20 位之间。"],
-  guestSelf: ["Please include yourself in the number of guests attending.", "出席人数请包括您本人。"],
-  failed: ["Sorry, your reply didn’t go through. Please try again in a moment.", "抱歉，提交未成功，请稍后再试。"],
+  noAttendance: ["Please let us know if you can attend.", "请告诉我们您能否出席。"],
+  guestCount: ["Please enter a guest number between 0 and 20.", "请填写0至20位的出席人数。"],
+  guestSelf: ["Please include yourself in the number of guests attending.", "请将您本人计算在出席人数内。"],
+  failed: ["Sorry, your reply didn’t go through. Please try again in a moment.", "抱歉，回复未能送出，请稍后再试。"],
 };
 
 /** Fill `el` with an English line and a Chinese line (no innerHTML). */
