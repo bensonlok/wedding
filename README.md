@@ -17,10 +17,11 @@ Mobile-first static wedding invitation, bilingual on one page (English + 简体�
 3. Our story + "read more"
 4. Three photo chapters (everyday joy · walking together · a new beginning)
 5. Family & friends, photo carousel
-6. Order of the day (Tea Ceremony, ROM, Dinner, After Party)
-7. Venue with map, Google Maps button and venue website link
-8. RSVP form (live)
-9. Add to Calendar (Google Calendar link + `assets/benson-mecki-wedding.ics`)
+6. Order of the day (Tea Ceremony, ROM, Dinner, After Party), with "Guests are welcome from 3:00 PM onwards"
+7. A little something for you: Coffee Cart, Ice Cream Cart, Handcraft Corner (3:00 PM onwards); Drinks & Cocktails (from 5:00 PM)
+8. Venue with map, Google Maps button and venue website link
+9. RSVP form (live)
+10. Add to Calendar (Google Calendar link + `assets/benson-mecki-wedding.ics`)
 
 ## Files
 
@@ -37,7 +38,9 @@ Mobile-first static wedding invitation, bilingual on one page (English + 简体�
 
 The RSVP form is live (`CONFIG.rsvp.enabled: true` in `script.js`). Replies are saved to the
 Supabase table `wedding_rsvp` (insert-only public key): name, attendance (yes / no / maybe),
-guest count (0 to 20), optional phone and message.
+guest count (0 to 20, "Please include yourself"; set to 0 automatically when
+"not attending" is picked, at least 1 for "yes"), optional phone and message.
+The reply-by date (1 November 2026 / 2026年11月1日) is hardcoded in `index.html`.
 
 ```js
 rsvp: {

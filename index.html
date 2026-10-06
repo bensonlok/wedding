@@ -164,6 +164,7 @@
         <h2 class="title reveal">Order of the Day</h2>
         <p class="title-cn reveal" lang="zh-Hans">当日流程</p>
         <p class="tl__date reveal">Friday, 20 November 2026<br /><span lang="zh-Hans">2026年11月20日（星期五）</span></p>
+        <p class="tl__welcome reveal">Guests are welcome from 3:00&nbsp;PM onwards.<br /><span lang="zh-Hans">宾客可于下午3时起陆续抵达。</span></p>
 
         <ol class="tl">
           <li class="tl__item reveal">
@@ -179,8 +180,7 @@
             <div class="tl__body">
               <p class="tl__time">5:00 PM</p>
               <h3 class="tl__title">ROM (Registry of Marriage)</h3>
-              <p class="tl__cn" lang="zh-Hans">注册结婚（ROM）</p>
-              <p class="tl__venue">Our civil registration<br /><span lang="zh-Hans">民事婚姻注册仪式</span></p>
+              <p class="tl__cn" lang="zh-Hans">注册结婚</p>
             </div>
           </li>
           <li class="tl__item reveal">
@@ -200,6 +200,48 @@
             </div>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <!-- 7b. GUEST TREATS -->
+    <section class="section treats" id="treats" aria-labelledby="treatsTitle">
+      <div class="section__inner">
+        <span class="rule treats__rule reveal" aria-hidden="true"></span>
+        <p class="eyebrow reveal" id="treatsTitle">A little something for you · <span lang="zh-Hans">宾客小惊喜</span></p>
+
+        <div class="treats__group reveal">
+          <p class="treats__time">3:00 PM onwards <span lang="zh-Hans">下午3时起</span></p>
+          <ul class="treats__list">
+            <li class="treat">
+              <span class="tl__icon treat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12"/><path d="M7.5 4.5h9L18 7"/><path d="M6 7l1.6 13.5h8.8L18 7"/><path d="M7.1 11.5h9.8M7.6 15.5h8.8"/></svg></span>
+              <h3 class="treat__name">Coffee Cart</h3>
+              <p class="treat__cn" lang="zh-Hans">咖啡车</p>
+            </li>
+            <li class="treat">
+              <span class="tl__icon treat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 10.5a5.5 5.5 0 1 1 11 0"/><path d="M5.5 10.5h13L12 22z"/><path d="M8.6 14l5.6 4M15.4 14l-5.6 4"/></svg></span>
+              <h3 class="treat__name">Ice Cream Cart</h3>
+              <p class="treat__cn" lang="zh-Hans">雪糕车</p>
+            </li>
+            <li class="treat">
+              <span class="tl__icon treat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8 7.5L20 18M8 16.5L20 6"/></svg></span>
+              <h3 class="treat__name">Handcraft Corner</h3>
+              <p class="treat__cn" lang="zh-Hans">手作角落</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="treats__group reveal">
+          <p class="treats__time">From 5:00 PM <span lang="zh-Hans">下午5时起</span></p>
+          <ul class="treats__list treats__list--one">
+            <li class="treat">
+              <span class="tl__icon treat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-8 9z"/><path d="M12 13v7M8 20h8"/><path d="M15.5 4l2-2"/><circle cx="18.5" cy="7" r="1.5"/></svg></span>
+              <h3 class="treat__name">Drinks &amp; Cocktails</h3>
+              <p class="treat__cn" lang="zh-Hans">酒水与鸡尾酒</p>
+            </li>
+          </ul>
+        </div>
+
+        <p class="treats__note reveal">Take your time, explore, and enjoy the little surprises we&rsquo;ve prepared for you.<br /><span lang="zh-Hans">慢慢享受，我们为你准备了一些小小惊喜。</span></p>
       </div>
     </section>
 
@@ -234,11 +276,11 @@
         <p class="title-cn" lang="zh-Hans">出席回复</p>
         <p class="lead">
           We&rsquo;d love to know if you can join us.<br />
-          <span data-rsvp-deadline hidden>Please reply by <strong data-deadline="en"></strong>.</span>
+          <span data-rsvp-deadline>Please reply by <strong data-deadline="en">1 November 2026</strong>.</span>
         </p>
         <p class="lead lead--cn" lang="zh-Hans">
           诚盼您拨冗光临，烦请告知能否出席。<br />
-          <span data-rsvp-deadline hidden>敬请于 <strong data-deadline="zh"></strong> 前回复。</span>
+          <span data-rsvp-deadline>敬请于 <strong data-deadline="zh">2026年11月1日</strong> 前回复。</span>
         </p>
 
         <form class="rsvp-form" id="rsvpForm" novalidate>
@@ -255,9 +297,10 @@
           </fieldset>
 
           <label class="rsvp-form__field">
-            <span>Number of guests <span lang="zh-Hans">出席人数</span> <abbr title="required 必填">*</abbr></span>
-            <input type="number" name="guest_count" min="0" max="20" value="1" required inputmode="numeric" />
-            <small>Including yourself. Enter 0 if you can&rsquo;t attend.<br /><span lang="zh-Hans">含您本人；如未能出席，请填 0。</span></small>
+            <span>Number of guests attending <span lang="zh-Hans">出席人数</span> <abbr title="required 必填">*</abbr></span>
+            <input type="number" name="guest_count" min="0" max="20" value="1" required inputmode="numeric" aria-describedby="guestHint guestHintNo" />
+            <small id="guestHint">Please include yourself. <span lang="zh-Hans">请包括您本人。</span></small>
+            <small class="rsvp-form__hint-sub" id="guestHintNo" hidden>Not attending, so this is set to 0. <span lang="zh-Hans">未能出席，人数已设为 0。</span></small>
           </label>
 
           <label class="rsvp-form__field">
