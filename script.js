@@ -129,6 +129,7 @@ const RSVP_TEXT = {
   noName: ["Please enter your name.", "请填写您的姓名。"],
   noAttendance: ["Please let us know if you can attend.", "请选择能否出席。"],
   guestCount: ["Please enter a number of guests from 0 to 20.", "出席人数须介于 0 至 20 位之间。"],
+  guestSelf: ["Please include yourself in the number of guests attending.", "出席人数请包括您本人。"],
   failed: ["Sorry, your reply didn’t go through. Please try again in a moment.", "抱歉，提交未成功，请稍后再试。"],
 };
 
@@ -149,6 +150,8 @@ function setBilingual(el, pair, sep) {
   const section = document.getElementById("rsvp");
   if (!section || !cfg.enabled) return;
 
+  // The deadline is hardcoded in index.html (so it never shows blank without JS,
+  // in reader mode or in link previews); CONFIG only overrides it if set.
   if (cfg.deadline) {
     section.querySelectorAll("[data-rsvp-deadline]").forEach((el) => {
       const strong = el.querySelector("strong");
@@ -165,6 +168,28 @@ function setBilingual(el, pair, sep) {
   const status = document.getElementById("rsvpStatus");
   const submitBtn = document.getElementById("rsvpSubmit");
   if (!form || !cfg.supabaseUrl || !cfg.supabaseAnonKey) return;
+
+  // "Not attending" → guest count is set to 0 automatically (and restored if they change their mind).
+  const guestInput = form.querySelector('[name="guest_count"]');
+  const guestHintNo = document.getElementById("guestHintNo");
+  let lastGuests = guestInput ? guestInput.value : "1";
+  function syncGuests() {
+    if (!guestInput) return;
+    const choice = form.querySelector('[name="attendance"]:checked');
+    const notComing = !!choice && choice.value === "no";
+    if (guestHintNo) guestHintNo.hidden = !notComing;
+    if (notComing) {
+      if (!guestInput.readOnly && guestInput.value !== "0") lastGuests = guestInput.value;
+      guestInput.value = "0";
+      guestInput.readOnly = true;
+    } else {
+      if (guestInput.readOnly || guestInput.value === "0" || guestInput.value === "") {
+        guestInput.value = lastGuests && lastGuests !== "0" ? lastGuests : "1";
+      }
+      guestInput.readOnly = false;
+    }
+  }
+  form.querySelectorAll('[name="attendance"]').forEach((r) => r.addEventListener("change", syncGuests));
 
   function setStatus(msg, kind) {
     if (!status) return;
@@ -184,7 +209,7 @@ function setBilingual(el, pair, sep) {
     const guestRaw = String(fd.get("guest_count") || "").trim();
     const phone = String(fd.get("phone") || "").trim();
     const message = String(fd.get("message") || "").trim();
-    const guest_count = Number.parseInt(guestRaw, 10);
+    const guest_count = attendance === "no" ? 0 : Number.parseInt(guestRaw, 10);
 
     if (!name) {
       setStatus(RSVP_TEXT.noName, "is-err");
@@ -196,6 +221,10 @@ function setBilingual(el, pair, sep) {
     }
     if (!Number.isFinite(guest_count) || guest_count < 0 || guest_count > 20) {
       setStatus(RSVP_TEXT.guestCount, "is-err");
+      return;
+    }
+    if (attendance === "yes" && guest_count < 1) {
+      setStatus(RSVP_TEXT.guestSelf, "is-err");
       return;
     }
 
@@ -230,7 +259,9 @@ function setBilingual(el, pair, sep) {
         throw new Error(detail || `HTTP ${res.status}`);
       }
       form.reset();
-      form.querySelector('[name="guest_count"]').value = "1";
+      lastGuests = "1";
+      if (guestInput) { guestInput.readOnly = false; guestInput.value = "1"; }
+      if (guestHintNo) guestHintNo.hidden = true;
       setStatus(RSVP_TEXT.ok, "is-ok");
     } catch (err) {
       console.error(err);
