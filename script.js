@@ -1,6 +1,6 @@
 /**
  * Benson & Mecki — Wedding Invitation
- * Countdown, scroll reveal, menu, photo carousel, optional RSVP.
+ * Countdown, scroll reveal, menu, photo carousel, optional RSVP, background music.
  */
 
 const CONFIG = {
@@ -118,6 +118,100 @@ document.querySelectorAll("[data-carousel]").forEach((car) => {
   window.addEventListener("resize", update);
   update();
 });
+
+/* ----- Background music -----
+ * Browsers block autoplay with sound, so: try to play on load (some desktop browsers allow it);
+ * otherwise start on the guest's first interaction. The floating button toggles it.
+ * If the guest pauses, it stays paused. While the tab is hidden it pauses, and it resumes
+ * on return only if it was playing. */
+(function initMusic() {
+  const audio = document.getElementById("bgMusic");
+  const btn = document.getElementById("musicBtn");
+  if (!audio || !btn || typeof audio.play !== "function") return;
+
+  audio.loop = true;
+  audio.volume = 0.5; // soft; iOS ignores this (hardware volume only)
+
+  const LABEL = { play: "Play music · 播放音乐", pause: "Pause music · 暂停音乐" };
+  // First-interaction events. Only some count as a user gesture (iOS Safari: touchend/click;
+  // Chrome: pointerup/touchend/mousedown/keydown/click); the rest are cheap, silent attempts.
+  const GESTURES = ["pointerdown", "pointerup", "mousedown", "touchstart", "touchend", "click", "keydown"];
+  const PASSIVE = ["scroll", "wheel"];
+  let userPaused = false;   // the guest pressed pause: never auto-start again
+  let resumeOnShow = false; // paused only because the tab was hidden
+  let armed = false;
+  let pending = false;
+
+  function render() {
+    const playing = !audio.paused;
+    const label = playing ? LABEL.pause : LABEL.play;
+    btn.classList.toggle("is-playing", playing);
+    btn.setAttribute("aria-label", label);
+    btn.title = label;
+  }
+
+  function tryPlay() {
+    pending = true;
+    let p;
+    try { p = audio.play(); } catch (err) { p = Promise.reject(err); }
+    return Promise.resolve(p).then(
+      () => { pending = false; return true; },
+      () => { pending = false; return false; } // blocked: wait for a real gesture
+    );
+  }
+
+  function onInteract(e) {
+    if (userPaused || !audio.paused) { disarm(); return; }
+    if (e.target instanceof Node && btn.contains(e.target)) return; // the button handles its own taps
+    if (PASSIVE.includes(e.type) && pending) return;
+    tryPlay();
+  }
+  function arm() {
+    if (armed) return;
+    armed = true;
+    GESTURES.concat(PASSIVE).forEach((t) => window.addEventListener(t, onInteract, { capture: true, passive: true }));
+  }
+  function disarm() {
+    if (!armed) return;
+    armed = false;
+    GESTURES.concat(PASSIVE).forEach((t) => window.removeEventListener(t, onInteract, { capture: true }));
+  }
+
+  audio.addEventListener("play", () => { disarm(); render(); });
+  audio.addEventListener("playing", render);
+  audio.addEventListener("pause", render);
+
+  btn.addEventListener("click", () => {
+    resumeOnShow = false;
+    disarm();
+    if (audio.paused) {
+      userPaused = false;
+      tryPlay().then(render);
+    } else {
+      userPaused = true;
+      audio.pause();
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (!audio.paused) { resumeOnShow = true; audio.pause(); }
+    } else if (resumeOnShow || (armed && !userPaused)) {
+      resumeOnShow = false;
+      if (!userPaused) tryPlay().then((ok) => { if (!ok && !userPaused) arm(); });
+    }
+  });
+
+  if ("mediaSession" in navigator && typeof window.MediaMetadata === "function") {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: "Canon in D Major", artist: "Kevin MacLeod (Pachelbel)", album: "Benson & Mecki · Wedding Invitation" });
+    } catch (err) { /* optional */ }
+  }
+
+  render();
+  arm();
+  if (!document.hidden) tryPlay();
+})();
 
 /* ----- RSVP form (hidden unless CONFIG.rsvp.enabled) ----- */
 // Bilingual status strings: [English, 简体中文]
