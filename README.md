@@ -30,7 +30,7 @@ Mobile-first static wedding invitation, bilingual on one page (English + 简体�
 | `index.html` | Page content (English + Chinese copy) |
 | `styles.css` | Theme and layout |
 | `script.js` | Countdown, scroll reveal, menu, story carousel dots, RSVP form (`CONFIG`) |
-| `assets/photos/` | Photos (resized web JPEG, EXIF stripped): hero `photo-05-wedding.jpg`, story `story-0*.jpg` |
+| `assets/photos/` | Photos (resized web JPEG, EXIF stripped): hero `hero-rings.jpg` (wedding rings, compress only), story `story-0*.jpg` |
 | `assets/benson-mecki-wedding.ics` | Calendar file (Fri 20 Nov 2026, 3:00 PM to 11:30 PM MYT) |
 | `responses/` | Private, passcode-gated page for viewing RSVP replies |
 
