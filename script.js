@@ -10,8 +10,8 @@ const CONFIG = {
   // RSVP form posts to Supabase (sensify-tell-us / wedding_rsvp). Benson views replies in the table editor.
   rsvp: {
     enabled: true,
-    deadline: "1 November 2026",
-    deadlineZh: "2026年11月1日",
+    deadline: "20 October 2026",
+    deadlineZh: "2026年10月20日",
     supabaseUrl: "https://aukotwzggfpmepbkglro.supabase.co",
     // Public anon key (insert-only via RLS). Safe to ship in the static invite.
     supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1a290d3pnZ2ZwbWVwYmtnbHJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNjQ4MzgsImV4cCI6MjEwNTk0MDgzOH0.iF8vSE1s4gpQxxBQOytzZJ2o02tfHlaKyL_nc2lbzmM",
