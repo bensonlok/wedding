@@ -216,6 +216,11 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .carousel__dots { display: flex; justify-content: center; gap: 8px; margin-top: 1rem; }
 .carousel__dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-soft); opacity: 0.4; transition: all 0.3s; }
 .carousel__dots i.on { opacity: 1; transform: scale(1.25); }
+/* Little Adventures on wide screens: wrap into rows of three (3 + 2, centred) */
+@media (min-width: 900px) {
+  .chapter--wide .carousel { flex-wrap: wrap; row-gap: 1.4rem; }
+  .chapter--wide .carousel__slide { flex: 0 0 calc((100% - 1.6rem) / 3); max-width: 300px; }
+}
 
 .chapter--finale .chapter__text { padding-top: 0; }
 .chapter__date { margin-bottom: 1.1rem !important; font-family: var(--sans); font-size: 0.9rem !important; font-weight: 300; letter-spacing: 0.45em; padding-left: 0.45em; color: var(--gold-soft); opacity: 1 !important; }
