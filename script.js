@@ -365,3 +365,24 @@ function setBilingual(el, pair, sep) {
     }
   });
 })();
+
+/* ----- Hero (mobile): rings photo sits right above the names/date block ----- */
+(function heroRingsFit() {
+  const hero = document.querySelector(".hero");
+  const text = hero && hero.querySelector(".hero__text");
+  if (!hero || !text) return;
+  const RATIO = 1077 / 1192; // hero-rings.jpg height / width
+  const fit = () => {
+    if (window.matchMedia("(min-width: 900px)").matches) { ["--rb", "--rw", "--side"].forEach((v) => hero.style.removeProperty(v)); return; }
+    const vw = hero.clientWidth, rb = text.offsetHeight + 8;
+    const avail = hero.clientHeight - rb - 8; // room above the text
+    const target = Math.max(vw, Math.min(vw * 1.25, avail / RATIO)); // fill the room above the text; side crop never reaches the rings
+    const rw = target * RATIO <= avail ? target : Math.max(avail / RATIO, vw * 0.8); // short screens: shrink to fit
+    hero.style.setProperty("--rb", rb + "px");
+    hero.style.setProperty("--rw", Math.round(rw) + "px");
+    hero.style.setProperty("--side", (rw < vw ? Math.round((vw - rw) / 2) : -20) + "px");
+  };
+  fit();
+  window.addEventListener("resize", fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
