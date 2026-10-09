@@ -10,8 +10,8 @@ const CONFIG = {
   // RSVP form posts to Supabase (sensify-tell-us / wedding_rsvp). Benson views replies in the table editor.
   rsvp: {
     enabled: true,
-    deadline: "1 November 2026",
-    deadlineZh: "2026年11月1日",
+    deadline: "20 October 2026",
+    deadlineZh: "2026年10月20日",
     supabaseUrl: "",
     // Public anon key (insert-only via RLS). Safe to ship in the static invite.
     supabaseAnonKey: "",
@@ -204,7 +204,7 @@ document.querySelectorAll("[data-carousel]").forEach((car) => {
 
   if ("mediaSession" in navigator && typeof window.MediaMetadata === "function") {
     try {
-      navigator.mediaSession.metadata = new MediaMetadata({ title: "Nocturne Op. 9 No. 2", artist: "Chopin · Frank Lévy", album: "Benson & Mecki · Wedding Invitation" });
+      navigator.mediaSession.metadata = new MediaMetadata({ title: "Canon in D Major", artist: "Kevin MacLeod (Pachelbel)", album: "Benson & Mecki · Wedding Invitation" });
     } catch (err) { /* optional */ }
   }
 

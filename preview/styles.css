@@ -195,6 +195,7 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .chapter__img { margin: 0; }
 .chapter__img img { width: 100%; border-radius: 14px; box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
 .chapter__img--tall img { max-width: 420px; margin: 0 auto; }
+.chapter__img--more { margin-top: 1.2rem; }
 .chapter__text { padding-top: 1.5rem; }
 .chapter__text p { margin: 0 auto 0.45rem; max-width: 30ch; font-size: 1.15rem; line-height: 1.5; opacity: 0.94; text-wrap: balance; }
 .chapter__text p[lang] { max-width: 22em; font-size: 1rem; opacity: 0.8; letter-spacing: 0.05em; line-height: 1.7; }
@@ -216,6 +217,11 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .carousel__dots { display: flex; justify-content: center; gap: 8px; margin-top: 1rem; }
 .carousel__dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-soft); opacity: 0.4; transition: all 0.3s; }
 .carousel__dots i.on { opacity: 1; transform: scale(1.25); }
+/* Little Adventures on wide screens: wrap into rows of three (3 + 3) */
+@media (min-width: 900px) {
+  .chapter--wide .carousel { flex-wrap: wrap; row-gap: 1.4rem; }
+  .chapter--wide .carousel__slide { flex: 0 0 calc((100% - 1.6rem) / 3); max-width: 300px; }
+}
 
 .chapter--finale .chapter__text { padding-top: 0; }
 .chapter__date { margin-bottom: 1.1rem !important; font-family: var(--sans); font-size: 0.9rem !important; font-weight: 300; letter-spacing: 0.45em; padding-left: 0.45em; color: var(--gold-soft); opacity: 1 !important; }
@@ -398,7 +404,8 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .footer__date [lang] { letter-spacing: 0.12em; text-transform: none; }
 .footer__venue { margin: 0.3rem 0 0; opacity: 0.85; }
 .footer__love { margin: 1.8rem 0 0; font-size: 0.95rem; opacity: 0.6; }
-.footer__credit { margin: 1.4rem auto 0; max-width: 16rem; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.06em; line-height: 1.6; opacity: 0.45; }
+.footer__credit { margin: 1.4rem auto 0; max-width: 18rem; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.06em; line-height: 1.6; opacity: 0.45; }
+.footer__credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---------- background music button (bottom-right, clear of the menu and RSVP) ---------- */
 .music-btn {
