@@ -204,7 +204,7 @@ document.querySelectorAll("[data-carousel]").forEach((car) => {
 
   if ("mediaSession" in navigator && typeof window.MediaMetadata === "function") {
     try {
-      navigator.mediaSession.metadata = new MediaMetadata({ title: "Nocturne Op. 9 No. 2", artist: "Chopin · Frank Lévy", album: "Benson & Mecki · Wedding Invitation" });
+      navigator.mediaSession.metadata = new MediaMetadata({ title: "Canon in D Major", artist: "Kevin MacLeod (Pachelbel)", album: "Benson & Mecki · Wedding Invitation" });
     } catch (err) { /* optional */ }
   }
 
