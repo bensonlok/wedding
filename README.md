@@ -18,7 +18,7 @@ Mobile-first static wedding invitation, bilingual on one page (English + 简体�
 4. Our love story in five chapters: The Beginning 初见 · Little Adventures 一起走过 (3-photo swipe) ·
    The Proposal 求婚 · Our Family 我们的家 · The Big Day 大日子 (leads into the order of the day)
 5. Order of the day (Tea Ceremony, ROM, Dinner, After Party), with "Guests are welcome from 3:00 PM onwards"
-6. Sip, Create & Enjoy · 小酌 · 手作 · 享受相聚: Coffee Cart, Ice Cream Cart, Handcraft Corner (3:00 PM onwards); Drinks, Cocktails & Finger Food (from 5:00 PM)
+6. Sip, Create & Enjoy · 小酌 · 手作 · 享受相聚: Coffee Cart, Ice Cream Cart, Handcraft Corner (3:00 PM onwards); Drinks & Bites · 美酒 · 小食 (from 5:00 PM)
 7. Venue with map, Google Maps button and venue website link
 8. RSVP form (live)
 9. Add to Calendar (Google Calendar link + `assets/benson-mecki-wedding.ics`)
