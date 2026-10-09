@@ -117,6 +117,8 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 
 /* ---------- hero ---------- */
 .hero {
+  /* mobile rings photo geometry; --rb (text block height) and --rw/--side are refined by script.js */
+  --rw: max(100vw, 470px); --rh: calc(var(--rw) * 0.9035); --rb: 296px; --side: -20px;
   position: relative;
   min-height: 100vh;
   min-height: max(100svh, 720px);
@@ -130,15 +132,20 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
   background-color: var(--burgundy-deep);
   background-image: url("assets/photos/hero-rings.jpg");
   background-repeat: no-repeat;
-  background-size: max(100%, 440px) auto;
-  background-position: center top;
+  /* mobile: rings sit just above the names/date block (text is bottom-anchored, ~290px tall) */
+  background-size: var(--rw) auto;
+  background-position: center bottom var(--rb);
   animation: kenburns 18s ease-out both;
 }
 @keyframes kenburns { from { transform: scale(1.06); } to { transform: scale(1); } }
 .hero__shade {
   position: absolute; inset: 0;
-  /* light rings photo: soft top tint for the logo/menu, clear rings, then burgundy right where the photo ends */
-  background: linear-gradient(180deg, rgba(40,12,20,0.35) 0%, rgba(40,12,20,0) 9%, rgba(79,26,40,0) calc(max(100vw, 440px) * 0.70), rgba(79,26,40,0.9) calc(max(100vw, 440px) * 0.86), var(--burgundy-deep) calc(max(100vw, 440px) * 0.90), var(--burgundy-deep) 100%);
+  /* light rings photo: soft top tint for the logo/menu; burgundy above the photo fading in at its top edge;
+     clear rings; burgundy again right where the photo ends, under the names/date */
+  background:
+    linear-gradient(180deg, rgba(40,12,20,0.35) 0%, rgba(40,12,20,0) 9%),
+    linear-gradient(90deg, var(--burgundy-deep) 0%, var(--burgundy-deep) var(--side), rgba(79,26,40,0) calc(var(--side) + 20px), rgba(79,26,40,0) calc(100% - var(--side) - 20px), var(--burgundy-deep) calc(100% - var(--side)), var(--burgundy-deep) 100%),
+    linear-gradient(180deg, var(--burgundy-deep) 0%, var(--burgundy-deep) calc(100% - var(--rb) - var(--rh)), rgba(79,26,40,0) calc(100% - var(--rb) - var(--rh) + 36px), rgba(79,26,40,0) calc(100% - var(--rb) - var(--rh) * 0.16), rgba(79,26,40,0.9) calc(100% - var(--rb) - var(--rh) * 0.03), var(--burgundy-deep) calc(100% - var(--rb)), var(--burgundy-deep) 100%);
 }
 .hero__text { position: relative; z-index: 1; width: 100%; padding: 0 var(--gutter) 4.5rem; }
 .hero__date { margin: 0; font-family: var(--sans); font-size: 0.8rem; font-weight: 300; letter-spacing: 0.45em; padding-left: 0.45em; color: var(--gold-soft); }
