@@ -398,7 +398,8 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .footer__date [lang] { letter-spacing: 0.12em; text-transform: none; }
 .footer__venue { margin: 0.3rem 0 0; opacity: 0.85; }
 .footer__love { margin: 1.8rem 0 0; font-size: 0.95rem; opacity: 0.6; }
-.footer__credit { margin: 1.4rem auto 0; max-width: 16rem; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.06em; line-height: 1.6; opacity: 0.45; }
+.footer__credit { margin: 1.4rem auto 0; max-width: 18rem; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.06em; line-height: 1.6; opacity: 0.45; }
+.footer__credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---------- background music button (bottom-right, clear of the menu and RSVP) ---------- */
 .music-btn {
