@@ -280,6 +280,8 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 /* ---------- dress code ---------- */
 .dresscode { background: var(--ivory); }
 .dc__tagline { margin: 0 auto; max-width: 40rem; text-wrap: balance; font-size: 1.1rem; font-style: italic; line-height: 1.5; color: var(--text); }
+.dc__one { margin: 0 auto 1.4rem; max-width: 26rem; font-size: 1.12rem; line-height: 1.5; color: var(--text); text-wrap: balance; }
+.dc__one [lang] { display: inline-block; margin-top: 0.3rem; font-size: 0.95rem; letter-spacing: 0.04em; color: var(--muted); }
 .dc__nw { white-space: nowrap; }
 .dc__tagline [lang], .dc__tones [lang] { display: inline-block; margin-top: 0.3rem; word-break: keep-all; font-style: normal; font-size: 0.92rem; letter-spacing: 0.06em; color: var(--muted); }
 .dc__palette { list-style: none; margin: 2.2rem auto 0; padding: 0; max-width: 460px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 0.25rem; }
@@ -288,7 +290,7 @@ body.menu-open .topbar { background: transparent; color: #fff; box-shadow: none;
 .dc__name { font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; color: var(--burgundy); text-wrap: balance; white-space: nowrap; }
 @media (max-width: 379px) { .dc__name { white-space: normal; min-height: 2.8em; } }
 .dc__cn { margin-top: 0.2rem; font-size: 0.88rem; letter-spacing: 0.08em; color: var(--muted); }
-.dc__tones { margin: 1.6rem auto 0; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.6; color: var(--rose); }
+.dc__tones { margin: 1.6rem auto 0; max-width: 24rem; font-family: var(--sans); font-size: 0.86rem; letter-spacing: 0.04em; line-height: 1.6; color: var(--rose); text-wrap: balance; }
 .dc__tones [lang] { font-family: var(--cn); text-transform: none; }
 .dc__guide { margin: 2.4rem auto 0; max-width: 520px; display: grid; gap: 1rem; }
 .dc__card { padding: 1.4rem 1.2rem 1.3rem; border: 1px solid var(--gold-soft); border-radius: 14px; background: #fff; box-shadow: 0 8px 22px rgba(123,45,62,0.07); }
